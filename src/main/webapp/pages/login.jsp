@@ -10,7 +10,7 @@
 <body>
 	<h1>Login Form</h1>
 	
-	<form action="../LoginServlet" method="post">
+	<form action="/BubblesandWhirls/LoginServlet">
 		<label for="username">Username:</label> <input type="text" id="username" name="username" required>
 		<label for="password">Password:</label> <input type="password"	id="password" name="password" required>
 		<button type="submit">Login</button>		

@@ -38,7 +38,7 @@ public class DBController {
 		        stmt.setString(4, user.getPhoneNumber());
 		        stmt.setString(5, user.getUsername());
 		        stmt.setString(6, user.getPassword());
-		        stmt.setString(6, user.getRole());
+		        stmt.setString(7, user.getRole());
 		        
 
 		        // Execute the update statement and store the number of affected rows

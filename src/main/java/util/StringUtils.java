@@ -1,3 +1,5 @@
+package util;
+
 public class StringUtils {
     public static final String DRIVER_NAME = "jdbc:mysql://localhost:3304/";
     public static final String HOST_URL = "localhost";

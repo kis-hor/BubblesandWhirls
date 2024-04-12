@@ -5,18 +5,40 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="/BubblesandWhirls/stylesheets/register.css"/>
 </head>
 <body>
-	<h1>Registration Form</h1>
-	<form action="/BubblesandWhirls/RegisterServlet" method="post">
-		<label for="firstName">First Name:</label> <input type="text" id="firstName" name="firstName" required>
-		<label for="lastName">Last Name:</label> <input type="text" id="lastName" name="lastName" required>
-		<label for="username">Username:</label> <input type="text" id="username" name="username" required>
-		<label for="email">Email:</label> <input type="email" id="email" name="email" required>
-		<label for="phoneNumber">Phone Number:</label> <input type="tel" id="phoneNumber" name="phoneNumber" required>
-		<label for="password">Password:</label> <input type="password"	id="password" name="password" required>
-		<label for="retypePassword">Retype Password:</label> <input	type="password" id="retypePassword" name="retypePassword" required>
-		<button type="submit">Register</button>		
-	</form>
+	<div class="wrapper" style="background-image: url('images/bg-registration-form-1.jpg');">
+		<div class="inner">
+			<div class="image-holder">
+				<img src=>
+			</div>
+			<form action="/BubblesandWhirls/RegisterServlet" method="post">
+			<h3>Registration Form</h3>
+				<div class="form-group">
+					<label for="firstName">First Name:</label> <input type="text" id="firstName" name="first_name" required>
+					<label for="lastName">Last Name:</label> <input type="text" id="lastName" name="last_name" required>
+				</div>
+				<div class="form-wrapper">
+					<label for="username">Username:</label> <input type="text" id="username" name="user_name" required>
+				</div>
+				<div class="form-wrapper">
+					<label for="email">Email:</label> <input type="email" id="email" name="email" required>
+				</div>
+				<div class="form-wrapper">
+					<label for="phoneNumber">Phone Number:</label> <input type="tel" id="phoneNumber" name="phone_number" required>
+				</div>
+				<div class="form-wrapper">
+					<label for="password">Password:</label> <input type="password"	id="password" name="password" required>
+				</div>
+				<div class="form-wrapper">
+					<label for="retypePassword">Retype Password:</label> <input	type="password" id="retypePassword" name="retype_password" required>
+				</div>
+				
+		
+				<button type="submit">Register</button>		
+			</form>
+		</div>
+	</div>
 </body>
 </html>

@@ -6,15 +6,18 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/BubblesandWhirls/stylesheets/register.css"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="poppins-regular">
 	<div class="wrapper" style="background-image: url('images/bg-registration-form-1.jpg');">
 		<div class="inner">
 			<div class="image-holder">
 				<img src=>
 			</div>
 			<form action="/BubblesandWhirls/RegisterServlet" method="post">
-			<h3>Registration Form</h3>
+			<h3 class="poppins-semibold">REGISTRATION FORM</h3>
 				<div class="form-group">
 					<label for="firstName">First Name:</label> <input type="text" id="firstName" name="first_name" required>
 					<label for="lastName">Last Name:</label> <input type="text" id="lastName" name="last_name" required>

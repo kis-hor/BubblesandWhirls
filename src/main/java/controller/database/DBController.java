@@ -32,11 +32,11 @@ public class DBController {
 		        		.prepareStatement(StringUtils.REGISTER_USER_QUERY);//Query of Registering User
 
 		        // Setting the user information
-		        stmt.setString(1, user.getFirstName());
-		        stmt.setString(2, user.getLastName());
-		        stmt.setString(3, user.getEmail());
-		        stmt.setString(4, user.getPhoneNumber());
-		        stmt.setString(5, user.getUsername());
+		        stmt.setString(1, user.getUsername());
+		        stmt.setString(2, user.getFirstName());
+		        stmt.setString(3, user.getLastName());
+		        stmt.setString(4, user.getEmail());
+		        stmt.setString(5, user.getPhoneNumber());
 		        stmt.setString(6, user.getPassword());
 		        stmt.setString(7, user.getRole());
 		        
@@ -74,7 +74,7 @@ public class DBController {
 		 * @throws SQLException if a database access error occurs.
 		 * @throws ClassNotFoundException if the JDBC driver class is not found.
 		 */
-		public int getStudentLoginInfo(LoginModel loginModel) {
+		public int getUserLoginInfo(LoginModel loginModel) {
 		    // Try-catch block to handle potential SQL or ClassNotFound exceptions
 		    try {
 		        // Prepare a statement using the predefined query for login check

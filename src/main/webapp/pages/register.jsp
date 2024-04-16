@@ -1,3 +1,4 @@
+<%@page import="util.StringUtils" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -19,12 +20,20 @@
 			<div class="form-holder">
 			<form action="/BubblesandWhirls/RegisterServlet" method="post">
 			<h3 class="poppins-semibold" style="font-size: 25px; text-align: center;">REGISTRATION FORM</h3>
+			<% 
+		    String errorMessage = (String) request.getAttribute(StringUtils.ERROR_MESSAGE);
+		    if(errorMessage != null && !errorMessage.isEmpty()){
+			%>
+		    <p class="error-message"><%= errorMessage %></p>
+			<%
+		    }
+			%>
 				<div class="form-group">
-					<label for="firstName"></label> <input type="text" id="firstName" name="first_name" placeholder="First Name" required style="margin-left:0px;">
+					<label for="firstName"></label> <input type="text" id="firstName" name="first_name" placeholder="First Name" required style="margin-left:0px;" >
 					<label for="lastName"></label> <input type="text" id="lastName" name="last_name" placeholder="Last Name" required>
 				</div>
 				<div class="form-wrapper">
-					<label for="username"></label> <input type="text" id="username" name="user_name" placeholder="Username" required>
+					<label for="username"></label> <input type="text" id="username" name="user_name" placeholder="Username" required>	
 				</div>
 				<div class="form-wrapper">
 					<label for="email"></label> <input type="email" id="email" name="email" placeholder="Email" required>

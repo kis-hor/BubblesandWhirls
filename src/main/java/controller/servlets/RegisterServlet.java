@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import controller.database.DBController;
 import model.RegisterModel;
 import util.StringUtils;
+import util.ValidationUtils;
 
 /**
  * Servlet implementation class RegisterServlet
@@ -54,15 +55,65 @@ public class RegisterServlet extends HttpServlet {
 		String retypePassword= request.getParameter(StringUtils.RETYPE_PASSWORD);
 		String role = "user";
 
-		
 		RegisterModel registerModel = new RegisterModel(firstName, lastName, email, phoneNumber, userName, password, role);
 		
-		int result = dbController.registerStudent(registerModel);
-		
-		if(result==1) {
-			response.sendRedirect(request.getContextPath() + StringUtils.LOGIN_PAGE);
+//		
+			if(!ValidationUtils.isValidName(firstName)) {
+				request.setAttribute(StringUtils.ERROR_MESSAGE, StringUtils.FIRST_NAME_ERROR);
+				request.getRequestDispatcher(StringUtils.REGISTER_PAGE).forward(request, response);
+				return;
+			}
+			if(!ValidationUtils.isValidName(lastName)) {
+				request.setAttribute(StringUtils.ERROR_MESSAGE, StringUtils.LAST_NAME_ERROR);
+				request.getRequestDispatcher(StringUtils.REGISTER_PAGE).forward(request, response);
+				return;
+			}
+//			if(!ValidationUtils.isValidName(userName)) {
+//			    request.setAttribute(StringUtils.ERROR_MESSAGE, StringUtils.USERNAME_INVALID_ERROR_MESSAGE);
+//			    request.getRequestDispatcher(StringUtils.REGISTER_PAGE).forward(request, response);
+//			    return;
+//			}
+		    
+		    int result = dbController.registerStudent(registerModel);
+		    
+		    if(password.equals(retypePassword)) {
+		    switch(result) {
+		    	case 1 -> {
+		    		request.setAttribute(StringUtils.SUCCESS_MESSAGE, StringUtils.SUCCESS_REGISTER_MESSAGE);
+		    		response.sendRedirect(request.getContextPath() + StringUtils.LOGIN_PAGE);
+		    	}
+		    	case 0 -> {
+		    		request.setAttribute(StringUtils.ERROR_MESSAGE, StringUtils.REGISTER_ERROR_MESSAGE);
+		    		request.getRequestDispatcher(StringUtils.REGISTER_PAGE).forward(request, response);
+		    	}
+		    	case -1 -> {
+		    		request.setAttribute(StringUtils.ERROR_MESSAGE, StringUtils.SERVER_ERROR_MESSAGE);
+		    		request.getRequestDispatcher(StringUtils.REGISTER_PAGE).forward(request, response);
+		    	}
+		    	case -2 -> {
+		    		request.setAttribute(StringUtils.ERROR_MESSAGE, StringUtils.USERNAME_ERROR_MESSAGE);
+		    		request.getRequestDispatcher(StringUtils.REGISTER_PAGE).forward(request, response);
+		    	}
+		    	case -3 -> {
+		    		request.setAttribute(StringUtils.ERROR_MESSAGE, StringUtils.EMAIL_ERROR_MESSAGE);
+		    		request.getRequestDispatcher(StringUtils.REGISTER_PAGE).forward(request, response);
+		    	}
+		    	case -4 -> {
+		    		request.setAttribute(StringUtils.ERROR_MESSAGE, StringUtils.PHONE_ERROR_MESSAGE);
+		    		request.getRequestDispatcher(StringUtils.REGISTER_PAGE).forward(request, response);
+		    	}
+		    	default ->{
+		    		request.setAttribute(StringUtils.ERROR_MESSAGE, StringUtils.SERVER_ERROR_MESSAGE);
+		    		request.getRequestDispatcher(StringUtils.REGISTER_PAGE).forward(request, response);
+		    		
+		    	}
+		    }
+		  }else {
+		    	request.setAttribute(StringUtils.ERROR_MESSAGE, StringUtils.PASSWORD_UNMATCHED_ERROR_MESSAGE);
+		    	request.getRequestDispatcher(StringUtils.REGISTER_PAGE).forward(request, response);
+		    }
+		    
 		}
 		
-	}
 
 }

@@ -1,3 +1,4 @@
+<%@page import="util.StringUtils" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -20,11 +21,27 @@
 			<div class="form-holder">
 			<form action="/BubblesandWhirls/LoginServlet" method="post">
 			<h3 class="poppins-semibold" style="font-size: 25px; text-align: center;">LOGIN FORM</h3>
+			<% 
+		    String errorMessage = (String) request.getAttribute(StringUtils.ERROR_MESSAGE);
+		    if(errorMessage != null && !errorMessage.isEmpty()){
+			%>
+		    <p class="error-message"><%= errorMessage %></p>
+			<%
+		    }
+			%>
+			<% 
+		    String successMessage = (String) request.getAttribute(StringUtils.SUCCESS_MESSAGE);
+		    if(successMessage != null && !successMessage.isEmpty()){
+			%>
+		    <p class="success-message"><%= successMessage %></p>
+			<%
+		    }
+			%>
 			<div class="form-wrapper" style="margin-top:100px;">
 					<label for="username"></label> <input type="text" id="username" name="user_name" placeholder="Username" required>
 			</div>
 			<div class="form-wrapper" style="margin-bottom:80px;">
-					<label for="password"></label> <input type="password"	id="password" name="password" placeholder="Password" required>
+					<label for="password"></label> <input type="password" id="password" name="password" placeholder="Password" required>
 			</div>
 			<button type="submit" class="poppins-semibold">Login</button>	
 				<p style="text-align:center;">Don't have an account? <a href="register.jsp">Register</a></p>	

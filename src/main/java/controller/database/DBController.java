@@ -16,10 +16,10 @@ public class DBController {
 		public Connection getConnection() throws SQLException, ClassNotFoundException {
 
 		    // Load the JDBC driver class specified by the StringUtils.DRIVER_NAME constant
-		    Class.forName(StringUtils.DRIVER_NAME);
+		    Class.forName("com.mysql.jdbc.Driver");
 
 		    // Create a connection to the database using the provided credentials
-		    return DriverManager.getConnection(StringUtils.HOST_URL, StringUtils.HOST_NAME,
+		    return DriverManager.getConnection("jdbc:mysql://localhost:3304/bubbles_whirls", StringUtils.HOST_NAME,
 		                                      StringUtils.HOST_PASS);
 		}
 		
@@ -28,8 +28,33 @@ public class DBController {
 
 		    try {
 		        // Preparation of Registering User
+		    	Connection con = getConnection();
 		        PreparedStatement stmt = getConnection()
 		        		.prepareStatement(StringUtils.REGISTER_USER_QUERY);//Query of Registering User
+		        
+		        PreparedStatement checkUsernameSt = con.prepareStatement(StringUtils.GET_USERNAME);
+				checkUsernameSt.setString(1, user.getUsername());
+				ResultSet checkUsernameRs = checkUsernameSt.executeQuery();
+				checkUsernameRs.next();
+				if(checkUsernameRs.getInt(1) > 0) {
+					return -2;
+				}
+				
+				PreparedStatement checkPhoneSt = con.prepareStatement(StringUtils.GET_PHONE);
+				checkPhoneSt.setString(1, user.getPhoneNumber());
+				ResultSet checkPhoneRs = checkPhoneSt.executeQuery();
+				checkPhoneRs.next();
+				if(checkPhoneRs.getInt(1) > 0) {
+					return -4;
+				}
+				
+				PreparedStatement checkEmailSt = con.prepareStatement(StringUtils.GET_EMAIL);
+				checkEmailSt.setString(1, user.getEmail());
+				ResultSet checkEmailRs = checkEmailSt.executeQuery();
+				checkEmailRs.next();
+				if(checkEmailRs.getInt(1) > 0) {
+					return -3;
+				}
 
 		        // Setting the user information
 		        stmt.setString(1, user.getUsername());
@@ -37,7 +62,8 @@ public class DBController {
 		        stmt.setString(3, user.getLastName());
 		        stmt.setString(4, user.getEmail());
 		        stmt.setString(5, user.getPhoneNumber());
-		        stmt.setString(6, user.getPassword());
+		        stmt.setString(6, PasswordEncryptionWithAes.encrypt(
+		        		user.getUsername(), user.getPassword()));
 		        stmt.setString(7, user.getRole());
 		        
 
@@ -80,24 +106,26 @@ public class DBController {
 		        // Prepare a statement using the predefined query for login check
 		        PreparedStatement st = getConnection()
 		        		.prepareStatement(StringUtils.USER_LOGIN_QUERY_CHECK);
-
+//		        System.out.println(st);
 		        // Set the username in the first parameter of the prepared statement
 		        st.setString(1, loginModel.getUsername());
+		        
 
 		        // Execute the query and store the result set
 		        ResultSet result = st.executeQuery();
-
+		        
 		        // Check if there's a record returned from the query
 		        if (result.next()) {
 		            // Get the username from the database
-		            String userDb = result.getString(StringUtils.USER_NAME);
+		        	String userDb = result.getString(StringUtils.USER_NAME);
 
 		            // Get the password from the database
-		            String encryptedPwd = result.getString(StringUtils.PASSWORD);
-
-		            String decryptedPwd = PasswordEncryptionWithAes.decrypt(encryptedPwd, userDb);
+		        	String encryptedPwd = result.getString(StringUtils.PASSWORD);
+		        	
+		        	String decryptedPwd = PasswordEncryptionWithAes.decrypt(encryptedPwd, userDb);
+		        	
 		            // Check if the username and password match the credentials from the database
-		            if (userDb.equals(loginModel.getUsername()) 
+		        	if (userDb.equals(loginModel.getUsername()) 
 		            		&& decryptedPwd.equals(loginModel.getPassword())) {
 		                // Login successful, return 1
 		                return 1;
@@ -121,7 +149,6 @@ public class DBController {
 		// Login User Ends here
 		
 		
-		
-		
-	
+
 }
+

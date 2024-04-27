@@ -1,5 +1,7 @@
 package util;
 
+import java.io.File;
+
 public class StringUtils {
 	public static final String DB_NAME = "bubbles_whirls";
 	public static final String DRIVER_NAME = "com.mysql.jdbc.Driver";
@@ -12,6 +14,7 @@ public class StringUtils {
 	public static final String GET_EMAIL = "SELECT COUNT(*) FROM users WHERE email = ?";
 	public static final String REGISTER_USER_QUERY = "INSERT INTO users(user_name, first_name, last_name, email, phone_number, password, role) VALUES( ?, ?, ?, ?, ?, ?, ?)";
     public static final String USER_LOGIN_QUERY_CHECK = "SELECT * FROM users WHERE user_name = ?";
+    
     
     // Keep or modify the changes made in your local branch
     public static final String USER_NAME = "user_name";
@@ -41,6 +44,7 @@ public class StringUtils {
 	public static final String LAST_NAME_ERROR = "Please input lastname correctly";
 	public static final String MESSAGE_ERROR_CREATE_ACCOUNT = "Account for this username is not registered! Please create a new account.";
 	
+	
         
 	public static final String USERNAME_INVALID_ERROR_MESSAGE = "Username should contain both name and letters";
 	public static final String USERNAME_LENGTH_ERROR_MESSAGE = "Username should be greater than 4 and less than 20";
@@ -48,12 +52,29 @@ public class StringUtils {
     public static final String LOGIN_PAGE = "/pages/login.jsp";
     public static final String HOME_PAGE = "/index.jsp";
     public static final String REGISTER_PAGE = "/pages/register.jsp";
+    public static final String ADMIN_PRODUCT_PAGE = "/pages/admin-product.jsp";
+    public static final String PRODUCT_LIST_SERVLET = "/ProductListServlet";
     
     public static final String USER = "user";
     
-    
+    public static final String IMAGE_DIR_USER = "Users\\Admin\\eclipse-workspace\\BubblesandWhirls\\src\\main\\webapp\\resources\\images\\user\\";
+	public static final String IMAGE_DIR_SAVE_PATH = "C:" + File.separator + IMAGE_DIR_USER;
 	
+	public static final String GET_ALL_PRODUCTS_INFO = "SELECT * FROM product";
+	public static final String ADD_PRODUCT = "INSERT INTO product (product_id, product_name, product_image_path, product_price, product_description, inventory) VALUES (?,?,?,?,?,?)";
+	public static final String PRODUCT_ID = "product_id";
+	public static final String PRODUCT_NAME = "product_name";
+	public static final String PRODUCT_PRICE = "product_price";
+	public static final String PRODUCT_DESCRIPTION = "product_description";
+	public static final String PRODUCT_INVENTORY = "inventory";
+	public static final String PRODUCT_CATEGORY = "productCategory";
 	
+	public static final String DELETE_USER = "DELETE FROM product WHERE product_id = ?";
 	
+	public static final String MESSAGE_SUCCESS_DELETE = "Successfully Deleted!";
+	public static final String MESSAGE_ERROR_DELETE = "Cannot delete the user!";
+	
+	public static final String DELETE_ID= "deleteId";
+	public static final String UPDATE_ID= "updateId";
 }
 

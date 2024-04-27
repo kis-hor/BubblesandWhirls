@@ -9,8 +9,7 @@ public class RegisterModel {
 		private String username;
 		private String password;
 		private String role;
-		public RegisterModel(String firstName, String lastName, String email, String phoneNumber, String username,
-				String password, String role) {
+		public RegisterModel(String firstName, String lastName, String email, String phoneNumber, String username,String password, String role) {
 			super();
 			this.firstName = firstName;
 			this.lastName = lastName;

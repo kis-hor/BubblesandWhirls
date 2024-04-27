@@ -1,15 +1,19 @@
 package controller.database;
 
 import java.sql.Connection;
+
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import model.LoginModel;
 import model.PasswordEncryptionWithAes;
+import model.ProductModel;
 import model.RegisterModel;
 import util.StringUtils;
+
 
 public class DBController {
 	 
@@ -19,7 +23,7 @@ public class DBController {
 		    Class.forName("com.mysql.jdbc.Driver");
 
 		    // Create a connection to the database using the provided credentials
-		    return DriverManager.getConnection("jdbc:mysql://localhost:3304/bubbles_whirls", StringUtils.HOST_NAME,
+		    return DriverManager.getConnection("jdbc:mysql://localhost:3306/bubbles_whirls", StringUtils.HOST_NAME,
 		                                      StringUtils.HOST_PASS);
 		}
 		
@@ -147,8 +151,66 @@ public class DBController {
 		    }
 		}
 		// Login User Ends here
+		public int addProduct(ProductModel productModel) {
+			try(Connection con = getConnection()) {
+				PreparedStatement st = con.prepareStatement(StringUtils.ADD_PRODUCT);
+				
+				st.setInt(1, productModel.getProductId());
+				st.setString(2, productModel.getProductName());
+				st.setString(3, productModel.getProductImageUrl());
+				st.setInt(4, productModel.getProductPrice());
+				st.setString(5, productModel.getProductDescription());
+				st.setInt(6, productModel.getProductInventory());
+				st.setString(7, productModel.getProductCategory());
+				
+				int result = st.executeUpdate();
+				return result > 0 ? 1 : 0;
+				
+			}catch(SQLException | ClassNotFoundException ex) {
+				ex.printStackTrace();
+				return -1;
+				
+			}
+			
+		}
 		
+		public ArrayList<ProductModel> getAllProductsInfo(){
+			try {
+				PreparedStatement stmt = getConnection().prepareStatement(StringUtils.GET_ALL_PRODUCTS_INFO);
+				
+				ResultSet result = stmt.executeQuery();
+				
+				ArrayList<ProductModel> products = new ArrayList<ProductModel>();
+				
+				while(result.next()) {
+					ProductModel product = new ProductModel();
+					product.setProductId(result.getInt("product_id"));
+					product.setProductName(result.getString("product_name"));
+					product.setProductImageUrl(result.getString("product_image_path"));
+					product.setProductPrice(result.getInt("product_price"));
+					product.setProductDescription(result.getString("product_description"));
+					product.setProductInventory(result.getInt("inventory"));
+					
+					products.add(product);
+				}
+				
+				return products;
+			}catch(SQLException | ClassNotFoundException ex) {
+				ex.printStackTrace();
+				return null;
+			}
+		}
 		
+		public int deleteStudentInfo(String product_id) {
+			try (Connection con = getConnection()) {
+				PreparedStatement st = con.prepareStatement(StringUtils.DELETE_USER);
+				st.setString(1, product_id);
+				return st.executeUpdate();
+			} catch (SQLException | ClassNotFoundException ex) {
+				ex.printStackTrace(); // Log the exception for debugging
+				return -1;
+			}
+		}
 
 }
 

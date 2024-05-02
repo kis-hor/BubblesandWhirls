@@ -39,13 +39,23 @@ public class ModifyServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String updateId = request.getParameter(StringUtils.UPDATE_ID);
-		String deleteId = request.getParameter(StringUtils.DELETE_ID);
+		String updateProductId = request.getParameter(StringUtils.UPDATE_ID);
+		String deleteProductId = request.getParameter(StringUtils.DELETE_ID);
 
-		if (updateId != null && !updateId.isEmpty()) {
-			doPut(request, response);
+		if (updateProductId != null && !updateProductId.isEmpty()) {
+			request.getRequestDispatcher("/ProductUpdateServlet").forward(request,response);
 		}
-		if (deleteId != null && !deleteId.isEmpty()) {
+		if (deleteProductId != null && !deleteProductId.isEmpty()) {
+			doDelete(request, response);
+		}
+		
+		String updateUserId = request.getParameter(StringUtils.UPDATE_USER_ID);
+		String deleteUserId = request.getParameter(StringUtils.DELETE_USER_ID);
+
+		if (updateUserId != null && !updateUserId.isEmpty()) {
+			request.getRequestDispatcher("/ProductUpdateServlet").forward(request,response);
+		}
+		if (deleteUserId != null && !deleteUserId.isEmpty()) {
 			doDelete(request, response);
 		}
 
@@ -59,13 +69,21 @@ public class ModifyServlet extends HttpServlet {
 	@Override
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("delete triggered");
-		if (databaseController.deleteStudentInfo(req.getParameter(StringUtils.DELETE_ID)) == 1) {
+		if (databaseController.deleteProductInfo(req.getParameter(StringUtils.DELETE_ID)) == 1) {
 //			req.setAttribute(StringUtils.MESSAGE_SUCCESS, StringUtils.MESSAGE_SUCCESS_DELETE);
 			resp.sendRedirect(req.getContextPath() + StringUtils.PRODUCT_LIST_SERVLET);
 		} else {
 			req.setAttribute(StringUtils.ERROR_MESSAGE, StringUtils.MESSAGE_ERROR_DELETE);
 			resp.sendRedirect(req.getContextPath() + StringUtils.PRODUCT_LIST_SERVLET);
 		}
+		
+//		if (databaseController.deleteUserInfo(req.getParameter(StringUtils.DELETE_USER_ID)) == 1) {
+////			req.setAttribute(StringUtils.MESSAGE_SUCCESS, StringUtils.MESSAGE_SUCCESS_DELETE);
+//			resp.sendRedirect(req.getContextPath() + StringUtils.USER_LIST_SERVLET);
+//		} else {
+//			req.setAttribute(StringUtils.ERROR_MESSAGE, StringUtils.MESSAGE_ERROR_DELETE);
+//			resp.sendRedirect(req.getContextPath() + StringUtils.USER_LIST_SERVLET);
+//		}
 	}
 
 }

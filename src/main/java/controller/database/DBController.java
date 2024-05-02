@@ -69,6 +69,7 @@ public class DBController {
 		        stmt.setString(6, PasswordEncryptionWithAes.encrypt(
 		        		user.getUsername(), user.getPassword()));
 		        stmt.setString(7, user.getRole());
+		        stmt.setString(8, user.getImageUrlFromPart());
 		        
 
 		        // Execute the update statement and store the number of affected rows
@@ -114,6 +115,7 @@ public class DBController {
 		        // Set the username in the first parameter of the prepared statement
 		        st.setString(1, loginModel.getUsername());
 		        
+		        
 
 		        // Execute the query and store the result set
 		        ResultSet result = st.executeQuery();
@@ -126,17 +128,33 @@ public class DBController {
 		            // Get the password from the database
 		        	String encryptedPwd = result.getString(StringUtils.PASSWORD);
 		        	
-		        	String decryptedPwd = PasswordEncryptionWithAes.decrypt(encryptedPwd, userDb);
+		        	// Get the role of the user
+		        	
+		        	String role = result.getString("role");
+		        	System.out.println(role);
+		        	
 		        	
 		            // Check if the username and password match the credentials from the database
-		        	if (userDb.equals(loginModel.getUsername()) 
-		            		&& decryptedPwd.equals(loginModel.getPassword())) {
-		                // Login successful, return 1
-		                return 1;
+		        	
+		            // For regular users, decrypt the password and compare
+		            if (role.equals("user")) {
+		            	System.out.println("Is user");
+		                String decryptedPwd = PasswordEncryptionWithAes.decrypt(encryptedPwd, userDb);
+		                if (userDb.equals(loginModel.getUsername()) && decryptedPwd.equals(loginModel.getPassword())) {
+		                    return 1; // Regular user login successful
+		                } else {
+		                    return 0; // Username or password mismatch
+		                }
 		            } else {
-		                // Username or password mismatch, return 0
-		                return 0;
+		                // For admin users, compare passwords directly
+		            	System.out.println("Is admin");
+		                if (encryptedPwd.equals(loginModel.getPassword())) {
+		                    return 2; // Admin login successful
+		                } else {
+		                    return 0; // Username or password mismatch
+		                }
 		            }
+
 		        } else {
 		            // Username not found in the database, return -1
 		            return -1;
@@ -155,13 +173,13 @@ public class DBController {
 			try(Connection con = getConnection()) {
 				PreparedStatement st = con.prepareStatement(StringUtils.ADD_PRODUCT);
 				
-				st.setInt(1, productModel.getProductId());
-				st.setString(2, productModel.getProductName());
-				st.setString(3, productModel.getProductImageUrl());
-				st.setInt(4, productModel.getProductPrice());
-				st.setString(5, productModel.getProductDescription());
-				st.setInt(6, productModel.getProductInventory());
-				st.setString(7, productModel.getProductCategory());
+//				st.setInt(1, productModel.getProductId());
+				st.setString(1, productModel.getProductName());
+				st.setString(2, productModel.getProductImageUrl());
+				st.setInt(3, productModel.getProductPrice());
+				st.setString(4, productModel.getProductDescription());
+				st.setInt(5, productModel.getProductInventory());
+				st.setString(6, productModel.getProductCategory());
 				
 				int result = st.executeUpdate();
 				return result > 0 ? 1 : 0;
@@ -201,9 +219,35 @@ public class DBController {
 			}
 		}
 		
-		public int deleteStudentInfo(String product_id) {
+		
+		public ProductModel getProductInfo(String productId) {
+			try(Connection con = getConnection()) {
+				PreparedStatement pdt = con.prepareStatement(StringUtils.GET_PRODUCT_INFO);
+				pdt.setString(1, productId);
+				ResultSet result = pdt.executeQuery();
+				ProductModel product = new ProductModel();
+				
+				if(result.next()) {
+					product.setProductId(result.getInt("product_id"));
+					product.setProductName(result.getString("product_name"));
+					product.setProductImageUrl(result.getString("product_image_path"));
+					product.setProductPrice(result.getInt("product_price"));
+					product.setProductDescription(result.getString("product_description"));
+					product.setProductInventory(result.getInt("inventory"));
+					product.setProductCategory(result.getString("product_category"));
+						
+				}
+				return product;	
+			}catch(SQLException | ClassNotFoundException ex) {
+				ex.printStackTrace();
+				return null;
+			}
+		
+		}
+		
+		public int deleteProductInfo(String product_id) {
 			try (Connection con = getConnection()) {
-				PreparedStatement st = con.prepareStatement(StringUtils.DELETE_USER);
+				PreparedStatement st = con.prepareStatement(StringUtils.DELETE_PRODUCT);
 				st.setString(1, product_id);
 				return st.executeUpdate();
 			} catch (SQLException | ClassNotFoundException ex) {
@@ -211,6 +255,71 @@ public class DBController {
 				return -1;
 			}
 		}
+		
+		public int updateProductInfo(ProductModel productModel) {
+			try (Connection con = getConnection()) {
+				PreparedStatement pdt = con.prepareStatement(StringUtils.UPDATE_PRODUCT);
+				
+				pdt.setString(1, productModel.getProductName());
+				pdt.setInt(2, productModel.getProductPrice());
+				pdt.setString(3, productModel.getProductDescription());
+				pdt.setInt(4, productModel.getProductInventory());
+				pdt.setString(5, productModel.getProductCategory());
+				pdt.setInt(6, productModel.getProductId());
+				
+				int result = pdt.executeUpdate();
+				
+				return result;//1 or 0
+			} catch (SQLException | ClassNotFoundException ex) {
+				ex.printStackTrace(); // Log the exception for debugging
+				return -1;
+			}
+		}
+		
+		public ArrayList<RegisterModel> getAllUserInfo(){
+            try {
+                PreparedStatement stmt = getConnection().prepareStatement("SELECT * FROM users");
+                ResultSet result = stmt.executeQuery();
+
+                ArrayList<RegisterModel> users = new ArrayList<RegisterModel>();
+
+                while(result.next()) {
+                	RegisterModel user = new RegisterModel();
+                    user.setFirstName(result.getString("first_name"));
+                    user.setLastName(result.getString("last_name"));
+                
+                    user.setEmail(result.getString("email"));
+                   
+                    user.setPhoneNumber(result.getString("phone_number"));
+                    user.setUsername(result.getString("user_name"));
+                    user.setPassword(result.getString("password"));
+                    user.setRole(result.getString("role"));
+                    user.setImageUrlFromPart(result.getString("user_image"));
+                    
+                   
+
+                    users.add(user);
+                }
+                return users;
+            }catch (SQLException | ClassNotFoundException ex) {
+                ex.printStackTrace();
+                return null;
+            }
+		}
+		
+    		public int deleteUserInfo(String username) {
+    			try (Connection con = getConnection()) {
+    				PreparedStatement st = con.prepareStatement(StringUtils.DELETE_USER);
+    				st.setString(1, username);
+    				return st.executeUpdate();
+    			} catch (SQLException | ClassNotFoundException ex) {
+    				ex.printStackTrace(); // Log the exception for debugging
+    				return -1;
+    			}
+    		
+		
+
+}
 
 }
 

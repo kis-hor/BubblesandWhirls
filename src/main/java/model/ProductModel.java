@@ -16,10 +16,10 @@ public class ProductModel {
 	private String productCategory;
 	
 
-	public ProductModel(int productId, String productName, Part imagePart, int productPrice,
+	public ProductModel(String productName, Part imagePart, int productPrice,
 			String productDescription, int productInventory, String productCategory) {
 		super();
-		this.productId = productId;
+//		this.productId = productId;
 		this.productName = productName;
 		this.productImageUrl = getImageUrl(imagePart);
 		this.productPrice = productPrice;

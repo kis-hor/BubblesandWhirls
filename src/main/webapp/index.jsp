@@ -1,155 +1,76 @@
-<%-- <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="/BubblesandWhirls/stylesheets/style.css"/>
+<style>
+        body, html {
+        height: 100%;
+        margin: 0;
+    }
+
+    .hero-section {
+        position: relative;
+        height: 70vh; /* 70% of the viewport height */
+        overflow: hidden; /* Hide overflow content */
+    }
+
+    .hero-image {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+
+    .hero-description {
+        position: absolute;
+        bottom: 20px; /* Slightly above the bottom */
+        left: 50%;
+
+        text-align: center; /* Center the content horizontally */
+        color: white; /* Text color */
+        padding: 20px; /* Add padding for better spacing */
+        background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+    }
+
+    .hero-description h5,
+    .hero-description h2,
+    .hero-description button {
+        margin: 0;
+    }
+
+    .hero-description button {
+        margin-top: 20px; /* Adjust vertical spacing as needed */
+    }
+
+    .fade-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7)); /* Black fade effect */
+    }
+</style>
 </head>
-<body>
-	  <div class="slidecontainer">
-    <div id="sliderdiv">    
-        <script>
-            var slider = document.getElementById("sliderdiv");
-          	var imagePath = ["images/haier.jpeg", "images/candy.png", "images/ki.jpeg", "images/si.jpeg","images/po.jpeg"];
-          	var index = 1;
-          	setInterval(slide, 3000);
-          // two parameters- function and time in millisecond
-          function slide() {
-            if (index < imagePath.length) {
-              index = index + 1;
-            } else {
-              index = 1;
-            }
-            slider.innerHTML = "<img src = " + imagePath[index - 1] + ">";
-          }
-        </script>
-            <!-- slider section ends -->
-            <h1 class="heading2"><span>Our</span> Products</h1>
+<body class="poppins-regular">
+    <div class="hero-section">
+        <div class="hero-image">
+            <img src="${pageContext.request.contextPath}/images/hero.png">
+             <div class="fade-overlay"></div>
+            <div class="hero-description">
+                <h6>Bubbles & Whirls</h6>
+                <h2>Elevate cleanliness</h2>
+                <a href="${pageContext.request.contextPath}/pages/product.jsp"><button class="poppins-semibold">Shop Now</button></a>
+            </div>
             
-            <section class="sec" id="explore">
-  <div class="card">
-      <div class="img"><img src="images/h.jpeg"></div>
-      <div class="desc">abcd</div>
-      <div class="box1">
-          <p>Available</p>
-      </div>
-
-          <div class="box">
-              <div class="price">Rs.49,999</div>
-              <div class="button">Add to Cart</div>
-          </div>
-      </div>
-
-      <div class="card">
-          <div class="img"><img src="images/g.jpeg"></div>
-          <div class="desc">superman</div>
-          <div class="box1">
-              <p>Available</p>
-          </div>
-          <div class="box">
-              
-              <div class="price">Rs.67,999</div>
-              <div class="button">Add to Cart</div>
-          </div>
-      </div>
-
-      <div class="card">
-          <div class="img"><img src="images/s.png"></div>
-          <div class="desc">batman</div>
-          <div class="box1">
-              <p>Available</p>  
-          </div>
-          <div class="box">
-              <div class="price">Rs.112,999</div>
-              <div class="button">Add to Cart</div>
-          </div>
-      </div>
-
-      <div class="card">
-          <div class="img"><img src="images/sonies.webp"></div>
-          <div class="desc">Sharia</div>
-          <div class="box1">
-              <p> Not Available</p>
-          </div>
-          <div class="box">
-              <div class="price">Rs.192,000</div>
-              <div class="button">Add to Cart</div>
-          </div>
-      </div>
-      <div class="card">
-          <div class="img"><img src="images/gpp.jpeg"></div>
-          <div class="desc">biswas</div>
-          <div class="box1">
-              <p>Available</p>
-          </div>
-          <div class="box">
-              <div class="price">Rs.32,000</div>
-              <div class="button">Add to Cart</div>
-          </div>
-      </div>
-      <div class="card">
-          <div class="img"><img src="images/canonusa.png"></div>
-          <div class="desc">shibika</div>
-          <div class="box1">
-              <p>Not Available</p>
-          </div>
-          <div class="box">
-              <div class="price">Rs.102,000</div>
-              <div class="button">Add to Cart</div>
-          </div>
-      </div>
-
-      <div class="card">
-        <div class="img"><img src="images/gorilla.webp"></div>
-        <div class="desc">Kishor</div>
-        <div class="box1">
-            <p>Available</p>  
-        </div>
-        <div class="box">
-            <div class="price">Rs.7,000</div>
-            <div class="button">Add to Cart</div>
+           
         </div>
     </div>
-
-    <div class="card">
-      <div class="img"><img src="images/gorilla.webp"></div>
-      <div class="desc">sanir</div>
-      <div class="box1">
-          <p> Not Available</p>  
-      </div>
-      <div class="box">
-          <div class="price">Rs.7,000</div>
-          <div class="button">Add to Cart</div>
-      </div>
-  </div>
-  <div class="card">
-    <div class="img"><img src="images/gorilla.webp"></div>
-    <div class="desc">rai</div>
-    <div class="box1">
-        <p>Available</p>  
-    </div>
-    <div class="box">
-        <div class="price">Rs.7,000</div>
-        <div class="button">Add to Cart</div>
-    </div>
-</div>
-  
-
-<h1 class="heading2"><span>Learn More</span> about the Team</h1>
-
-<div class="hero-image">
- <div class="images"><img src="images/team.jpeg"></div>
-</div>
-    
-    
-            
-            
-       
-         
-    </div>
-</div>
-
-  
 </body>
-</html> --%>
+</html>
+

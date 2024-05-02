@@ -13,7 +13,7 @@
 <link rel="stylesheet" type="text/css" href="/BubblesandWhirls/stylesheets/register.css"/>
 </head>
 <body class="poppins-regular">
-	<jsp:include page="header.jsp"></jsp:include>
+	<%-- <jsp:include page="header.jsp"></jsp:include> --%>
 	<div class="wrapper" style="background-image: url('../images/background.png');">
 		<div class="inner">
 			<div class="image-holder">

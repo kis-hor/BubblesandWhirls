@@ -18,7 +18,7 @@ body {
     padding: 0;
     background-size: cover;
     background-repeat: no-repeat;
-  
+    
 }
 
 .wrapper {
@@ -35,7 +35,7 @@ body {
   padding: 20px;
   background: #fff;
   width: 870px;
-  height: 612px;
+  height: 660px;
   margin: auto;
   display: flex; }
 
@@ -112,25 +112,5 @@ button:hover {
 }
 
 
-
-.admin-container {
-    display: flex;
-    align-items: stretch;
-}
-
-.side-panel {
-    width: 400px;
-    position: fixed;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    background-color: #004E4E;
-    padding: 20px;
-}
-
-.main-panel {
-    flex: 1;
-    padding-left: 420px;
-}
 
 /* Add other styles as needed */

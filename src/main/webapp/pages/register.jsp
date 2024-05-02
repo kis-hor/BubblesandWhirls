@@ -17,7 +17,7 @@
 				<img src=>
 			</div>
 			<div class="form-holder">
-			<form action="/BubblesandWhirls/RegisterServlet" method="post">
+			<form action="/BubblesandWhirls/RegisterServlet" method="post"  enctype="multipart/form-data">
 			<h3 class="poppins-semibold" style="font-size: 25px; text-align: center;">REGISTRATION FORM</h3>
 			<% 
 		    String errorMessage = (String) request.getAttribute(StringUtils.ERROR_MESSAGE);
@@ -45,6 +45,9 @@
 				</div>
 				<div class="form-wrapper">
 					<label for="retypePassword"></label> <input	type="password" id="retypePassword" name="retype_password" placeholder="Retype Password" required>
+				</div>
+				<div class="form-wrapper">
+					<label for="image">User Image</label> <input type="file" id="image" name="image">
 				</div>
 				
 		

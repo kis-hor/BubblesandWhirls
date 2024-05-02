@@ -1,5 +1,11 @@
 package model;
 
+import java.io.File;
+
+import javax.servlet.http.Part;
+
+import util.StringUtils;
+
 public class RegisterModel {
 	
 		private String firstName;
@@ -9,7 +15,9 @@ public class RegisterModel {
 		private String username;
 		private String password;
 		private String role;
-		public RegisterModel(String firstName, String lastName, String email, String phoneNumber, String username,String password, String role) {
+		private String imageUrlFromPart;
+		
+		public RegisterModel(String firstName, String lastName, String email, String phoneNumber, String username,String password, String role, Part imagePart) {
 			super();
 			this.firstName = firstName;
 			this.lastName = lastName;
@@ -18,6 +26,11 @@ public class RegisterModel {
 			this.username = username;
 			this.password = password;
 			this.role = role;
+			this.setImageUrlFromPart(getImageUrl(imagePart));
+		}
+		
+		public RegisterModel() {
+			
 		}
 		
 		
@@ -63,6 +76,38 @@ public class RegisterModel {
 		public void setRole(String role) {
 			this.role = role;
 		}
+
+
 		
 		
+		private String getImageUrl(Part part) {
+			String savePath = StringUtils.IMAGE_DIR_SAVE_PATH;
+			File fileSaveDir = new File(savePath);
+			String imageUrlFromPart = null;
+			if (!fileSaveDir.exists()) {
+				fileSaveDir.mkdirs();
+			}
+			String contentDisp = part.getHeader("content-disposition");
+			String[] items = contentDisp.split(";");
+			for (String s : items) {
+				if (s.trim().startsWith("filename")) {
+					imageUrlFromPart = s.substring(s.indexOf("=") + 2, s.length() - 1);
+				}
+			}
+			if (imageUrlFromPart == null || imageUrlFromPart.isEmpty()) {
+				imageUrlFromPart = "download.jpg";
+			}
+			return imageUrlFromPart;
+		}
+
+		public String getImageUrlFromPart() {
+			return imageUrlFromPart;
+		}
+
+		public void setImageUrlFromPart(String imageUrlFromPart) {
+			this.imageUrlFromPart = imageUrlFromPart;
+		}
+
 }
+		
+

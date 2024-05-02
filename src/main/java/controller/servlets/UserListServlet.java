@@ -11,25 +11,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controller.database.DBController;
-import model.ProductModel;
+import model.RegisterModel;
 import util.StringUtils;
 
 /**
- * Servlet implementation class ProductListServlet
+ * Servlet implementation class UserListServlet
  */
-@WebServlet("/ProductListServlet")
-
+@WebServlet("/UserListServlet")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
 maxFileSize = 1024 * 1024 * 10, // 10MB
 maxRequestSize = 1024 * 1024 * 50)
-public class ProductListServlet extends HttpServlet {
+public class UserListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	DBController dbController = new DBController();
-       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProductListServlet() {
+    public UserListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,25 +37,11 @@ public class ProductListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
-		
-		System.out.println("Getting all products");
-		List<ProductModel> productList = dbController.getAllProductsInfo();
-		request.setAttribute("productList",productList);
-		
-		
-		//know current user role
-		
-		//if user role admin
-		
-		//else
-		
-		
-//		request.getRequestDispatcher(StringUtils.ADMIN_PRODUCT_PAGE).forward(request, response);
-		request.getRequestDispatcher(StringUtils.USER_PRODUCT_PAGE).forward(request, response);
-		
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		List<RegisterModel> userList = dbController.getAllUserInfo();
+		request.setAttribute("userList", userList);
+		request.getRequestDispatcher(StringUtils.USER_PROFILE_PAGE).forward(request, response);
 	}
-	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

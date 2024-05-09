@@ -53,7 +53,7 @@ public class ModifyServlet extends HttpServlet {
 		String deleteUserId = request.getParameter(StringUtils.DELETE_USER_ID);
 
 		if (updateUserId != null && !updateUserId.isEmpty()) {
-			request.getRequestDispatcher("/ProductUpdateServlet").forward(request,response);
+			request.getRequestDispatcher("/UserUpdateServlet").forward(request,response);
 		}
 		if (deleteUserId != null && !deleteUserId.isEmpty()) {
 			doDelete(request, response);
@@ -68,22 +68,29 @@ public class ModifyServlet extends HttpServlet {
 
 	@Override
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("delete triggered");
-		if (databaseController.deleteProductInfo(req.getParameter(StringUtils.DELETE_ID)) == 1) {
-//			req.setAttribute(StringUtils.MESSAGE_SUCCESS, StringUtils.MESSAGE_SUCCESS_DELETE);
-			resp.sendRedirect(req.getContextPath() + StringUtils.PRODUCT_LIST_SERVLET);
-		} else {
-			req.setAttribute(StringUtils.ERROR_MESSAGE, StringUtils.MESSAGE_ERROR_DELETE);
-			resp.sendRedirect(req.getContextPath() + StringUtils.PRODUCT_LIST_SERVLET);
-		}
-		
-//		if (databaseController.deleteUserInfo(req.getParameter(StringUtils.DELETE_USER_ID)) == 1) {
-////			req.setAttribute(StringUtils.MESSAGE_SUCCESS, StringUtils.MESSAGE_SUCCESS_DELETE);
-//			resp.sendRedirect(req.getContextPath() + StringUtils.USER_LIST_SERVLET);
-//		} else {
-//			req.setAttribute(StringUtils.ERROR_MESSAGE, StringUtils.MESSAGE_ERROR_DELETE);
-//			resp.sendRedirect(req.getContextPath() + StringUtils.USER_LIST_SERVLET);
-//		}
-	}
+	    String deleteProductId = req.getParameter(StringUtils.DELETE_ID);
+	    String deleteUserId = req.getParameter(StringUtils.DELETE_USER_ID);
+	    
 
+	    if (deleteProductId != null && !deleteProductId.isEmpty()) {
+	    	System.out.println("Delete product trigerred");
+	        if (databaseController.deleteProductInfo(deleteProductId) == 1) {
+	            resp.sendRedirect(req.getContextPath() + StringUtils.PRODUCT_LIST_SERVLET);
+	        } else {
+	            req.setAttribute(StringUtils.ERROR_MESSAGE, StringUtils.MESSAGE_ERROR_DELETE);
+	            resp.sendRedirect(req.getContextPath() + StringUtils.PRODUCT_LIST_SERVLET);
+	        }
+	    } else if (deleteUserId != null && !deleteUserId.isEmpty()) {
+	    	System.out.println("Delete user trigerred");
+	        if (databaseController.deleteUserInfo(deleteUserId) == 1) {
+	            resp.sendRedirect(req.getContextPath() + StringUtils.USER_LIST_SERVLET);
+	        } else {
+	            req.setAttribute(StringUtils.ERROR_MESSAGE, StringUtils.MESSAGE_ERROR_DELETE);
+	            resp.sendRedirect(req.getContextPath() + StringUtils.USER_LIST_SERVLET);
+	        }
+	    } else {
+	        // Handle invalid or missing delete ID parameter
+	        resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid or missing delete ID parameter");
+	    }
+	}
 }

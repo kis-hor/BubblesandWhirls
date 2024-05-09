@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import model.LoginModel;
+import model.OrderModel;
 import model.PasswordEncryptionWithAes;
 import model.ProductModel;
 import model.RegisterModel;
@@ -168,6 +169,34 @@ public class DBController {
 		        return -2;
 		    }
 		}
+		
+		public int getUserIdByUserName(String username) {
+
+            try {
+                // Prepare a statement to retrieve user_id based on username
+                Connection con = getConnection();
+                PreparedStatement st = con.prepareStatement("SELECT user_id FROM users WHERE user_name = ?");
+                st.setString(1, username);
+
+                // Execute the query and store the result set
+                ResultSet result = st.executeQuery();
+
+                // Check if there's a record returned from the query
+                if (result.next()) {
+                    // Retrieve the user_id from the result set
+                    int userId = result.getInt("user_id");
+                    return userId;
+                } else {
+                    // No user found with the given username, return -1 to indicate error
+                    return -1;
+                }
+            } catch (SQLException | ClassNotFoundException ex) {
+                // Print the stack trace for debugging purposes
+                ex.printStackTrace();
+                // Return -2 to indicate an internal error
+                return -2;
+            }
+    }
 		// Login User Ends here
 		public int addProduct(ProductModel productModel) {
 			try(Connection con = getConnection()) {
@@ -219,6 +248,65 @@ public class DBController {
 			}
 		}
 		
+		public ArrayList<OrderModel> getAllOrdersInfo(){
+			try {
+				PreparedStatement stmt = getConnection().prepareStatement(StringUtils.GET_ALL_ORDERS_INFO);
+				
+				ResultSet result = stmt.executeQuery();
+				
+				ArrayList<OrderModel> orders = new ArrayList<OrderModel>();
+				
+				while(result.next()) {
+					OrderModel order = new OrderModel();
+					order.setOrderId(result.getInt("order_id"));
+					order.setOrderDate(result.getDate("order_date").toLocalDate());
+					order.setOrderTotal(result.getInt("order_total"));
+					order.setDeliveryStatus(result.getString("delivery_status"));
+					order.setOrderStatus(result.getString("order_status"));
+					order.setOrderQuantity(result.getInt("order_quantity"));
+					order.setUsername(result.getString("user_name"));
+					order.setEmail(result.getString("email"));
+					
+					orders.add(order);
+				}
+				
+				return orders;
+			}catch(SQLException | ClassNotFoundException ex) {
+				ex.printStackTrace();
+				return null;
+			}
+		}
+		
+		public ArrayList<OrderModel> getAllUserOrderInfo(String userId){
+			try {
+			PreparedStatement stmt = getConnection().prepareStatement(StringUtils.GET_ALL_USER_ORDERS);
+			stmt.setString(1, userId);
+			ResultSet result = stmt.executeQuery();
+			
+			ArrayList<OrderModel> orders = new ArrayList<OrderModel>();
+			while(result.next()) {
+				OrderModel order = new OrderModel();
+				order.setDeliveryStatus(result.getString("delivery_status"));
+				order.setOrderStatus(result.getString("order_status"));
+				order.setOrderDate(result.getDate("order_date").toLocalDate());
+				order.setOrderId(result.getInt("order_id"));	
+				order.setOrderQuantity(result.getInt("order_quantity"));
+				order.setUsername(result.getString("user_name"));
+				order.setEmail(result.getString("email"));
+				order.setProductId(result.getInt("product_id"));
+				order.setProductName(result.getString("product_name"));
+				order.setProductPrice(result.getInt("product_price"));
+				order.setProductImageUrl(result.getString("product_image_path"));
+				order.setOrderTotal(result.getInt("order_total"));
+				orders.add(order);
+			}
+			
+			return orders;
+			}catch(SQLException | ClassNotFoundException ex) {
+				ex.printStackTrace();
+				return null;
+		}
+		}
 		
 		public ProductModel getProductInfo(String productId) {
 			try(Connection con = getConnection()) {
@@ -244,6 +332,35 @@ public class DBController {
 			}
 		
 		}
+		
+		public OrderModel getOrderInfo(String orderId) {
+			try(Connection con = getConnection()) {
+				PreparedStatement st = con.prepareStatement(StringUtils.GET_ORDER_INFO);
+				st.setString(1, orderId);
+				ResultSet result = st.executeQuery();
+				OrderModel order = new OrderModel();
+				
+				if(result.next()) {
+					order.setDeliveryStatus(result.getString("delivery_status"));
+					order.setOrderStatus(result.getString("order_status"));
+					order.setOrderDate(result.getDate("order_date").toLocalDate());
+					order.setOrderId(result.getInt("order_id"));	
+					order.setOrderQuantity(result.getInt("order_quantity"));
+					order.setUsername(result.getString("user_name"));
+					order.setEmail(result.getString("email"));
+					order.setProductId(result.getInt("product_id"));
+					order.setProductName(result.getString("product_name"));
+					order.setProductPrice(result.getInt("product_price"));
+					order.setProductImageUrl(result.getString("product_image_path"));
+				}
+				return order;	
+			}catch(SQLException | ClassNotFoundException ex) {
+				ex.printStackTrace();
+				return null;
+			}
+		
+		}
+		
 		
 		public int deleteProductInfo(String product_id) {
 			try (Connection con = getConnection()) {
@@ -276,6 +393,50 @@ public class DBController {
 			}
 		}
 		
+		public int updateOrderInfo(OrderModel orderModel) {
+			try (Connection con = getConnection()) {
+				PreparedStatement pdt = con.prepareStatement(StringUtils.UPDATE_ORDER);
+				
+				pdt.setString(1, orderModel.getDeliveryStatus());
+				pdt.setString(2, orderModel.getOrderStatus());
+				pdt.setInt(3, orderModel.getOrderId());
+				
+				
+				int result = pdt.executeUpdate();
+				
+				return result;//1 or 0
+			} catch (SQLException | ClassNotFoundException ex) {
+				ex.printStackTrace(); // Log the exception for debugging
+				return -1;
+			}
+		}
+		
+		
+		public int updateUserInfo(RegisterModel registerModel) {
+			try (Connection con = getConnection()) {
+				PreparedStatement st = con.prepareStatement(StringUtils.UPDATE_USER);
+				
+				st.setString(1, registerModel.getFirstName());
+				st.setString(2, registerModel.getLastName());
+				st.setString(3,registerModel.getEmail());
+				st.setString(4, registerModel.getPhoneNumber());
+				st.setString(5, registerModel.getUsername());
+				
+				int result = st.executeUpdate();
+				System.out.println(registerModel.getFirstName());
+				System.out.println(registerModel.getLastName());
+				System.out.println(registerModel.getEmail());
+				System.out.println(registerModel.getPhoneNumber());
+				System.out.println(registerModel.getUsername());
+				System.out.println("db result="+result);
+				return result;//1 or 0
+			
+			} catch (SQLException | ClassNotFoundException ex) {
+				ex.printStackTrace(); // Log the exception for debugging
+				return -1;
+			}
+		}
+		
 		public ArrayList<RegisterModel> getAllUserInfo(){
             try {
                 PreparedStatement stmt = getConnection().prepareStatement("SELECT * FROM users");
@@ -295,8 +456,6 @@ public class DBController {
                     user.setPassword(result.getString("password"));
                     user.setRole(result.getString("role"));
                     user.setImageUrlFromPart(result.getString("user_image"));
-                    
-                   
 
                     users.add(user);
                 }
@@ -307,11 +466,36 @@ public class DBController {
             }
 		}
 		
+		public RegisterModel getUserInfo(String username) {
+			try(Connection con = getConnection()) {
+				PreparedStatement stmt = con.prepareStatement(StringUtils.GET_USER_DETAIL);
+				stmt.setString(1, username);
+				ResultSet result = stmt.executeQuery();
+				RegisterModel user = new RegisterModel();
+				
+				if(result.next()) {
+					user.setUsername(result.getString("user_name"));
+					user.setFirstName(result.getString("first_Name"));
+					user.setLastName(result.getString("last_Name"));
+					user.setEmail(result.getString("email"));
+					user.setPhoneNumber(result.getString("phone_number"));
+					user.setImageUrlFromPart(result.getString("user_image"));
+					
+				}
+				return user;	
+			}catch(SQLException | ClassNotFoundException ex) {
+				ex.printStackTrace();
+				return null;
+			}
+		}		
+		
     		public int deleteUserInfo(String username) {
     			try (Connection con = getConnection()) {
     				PreparedStatement st = con.prepareStatement(StringUtils.DELETE_USER);
     				st.setString(1, username);
+    				System.out.println("result=" +st.executeUpdate());
     				return st.executeUpdate();
+    				
     			} catch (SQLException | ClassNotFoundException ex) {
     				ex.printStackTrace(); // Log the exception for debugging
     				return -1;
@@ -319,7 +503,33 @@ public class DBController {
     		
 		
 
-}
+    		}
+    		
+    		public ArrayList<ProductModel> searchProduct(String productName){
+    			try {
+                    PreparedStatement stmt = getConnection().prepareStatement("SELECT * FROM product WHERE product_name LIKE ?");
+                    
+                    stmt.setString(1, "%" + productName + "%");
+                    ResultSet result = stmt.executeQuery();
+                    
+                    ArrayList<ProductModel> searchResults = new ArrayList<ProductModel>();
+                    
+                    while (result.next()) {
+                        // Assuming you have a Product class with appropriate constructors and getters/setters
+                        ProductModel product = new ProductModel();
+                        product.setProductId(result.getInt("product_id"));
+                        product.setProductName(result.getString("product_name"));
+                        product.setProductImageUrl(result.getString("product_image_path"));
+                        product.setProductPrice(result.getInt("product_price"));
+                        // Set other attributes of the product as needed
+                        searchResults.add(product);
+                    }
+                    return searchResults;
+                }catch (SQLException | ClassNotFoundException ex) {
+                    ex.printStackTrace();
+                    return null;
+                }
+    		}
 
 }
 

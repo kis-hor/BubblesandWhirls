@@ -58,9 +58,11 @@ public class StringUtils {
     public static final String REGISTER_PAGE = "/pages/register.jsp";
     public static final String ADMIN_PRODUCT_PAGE = "/pages/admin-product.jsp";
     public static final String USER_PRODUCT_PAGE = "/pages/product.jsp";
+    public static final String USER_PRODUCT_DESCRIPTION_PAGE = "/pages/product-description.jsp";
     public static final String PRODUCT_LIST_SERVLET = "/ProductListServlet";
     public static final String SERVLET_URL_MODIFY_USER = "/ModifyServlet";
     public static final String USER_LIST_SERVLET = "/UserListServlet";
+    public static final String ADMIN_ORDER_PAGE = "/pages/admin-orders.jsp";
     
     public static final String USER = "user";
     
@@ -79,7 +81,7 @@ public class StringUtils {
 	public static final String PRODUCT_INVENTORY = "inventory";
 	public static final String PRODUCT_CATEGORY = "product_category";
 	
-	public static final String DELETE_USER = "DELETE FROM users WHERE username = ?";
+	public static final String DELETE_USER = "DELETE FROM users WHERE user_name = ?";
 	public static final String DELETE_PRODUCT = "DELETE FROM product WHERE product_id = ?";
 	
 	public static final String MESSAGE_SUCCESS_DELETE = "Successfully Deleted!";
@@ -90,7 +92,20 @@ public class StringUtils {
 	public static final String DELETE_USER_ID= "deleteUserId";
 	public static final String UPDATE_USER_ID= "updateUserId";
 	
-	  public static final String GET_ALL_USER_INFO = "SELECT * FROM users";
-	  public static final String USER_PROFILE_PAGE = "/pages/user-profile.jsp";
+  public static final String GET_ALL_USER_INFO = "SELECT * FROM users";
+  public static final String GET_USER_DETAIL = "SELECT * FROM users WHERE user_name=?";
+  public static final String UPDATE_USER ="UPDATE users SET first_name=?, last_name=?, email=?, phone_number=? WHERE user_name=?";
+  public static final String ADMIN_USER_PAGE = "/pages/admin-users.jsp";
+  public static final String USER_PROFILE_PAGE = "/pages/user-profile.jsp";
+  
+  
+  public static final String GET_ALL_USER_ORDERS = "SELECT  o.order_id, o.order_date, o.order_total, o.delivery_status, o.order_status, u.user_name, u.email, oi.order_quantity, p.product_id, p.product_name, p.product_price, p.product_image_path FROM orders o INNER JOIN users u ON o.user_id =u.user_id INNER JOIN order_item oi ON o.order_id = oi.order_id INNER JOIN product p ON oi.product_id = p.product_id WHERE u.user_id=?";
+  public static final String GET_ALL_ORDERS_INFO = "SELECT o.order_id, o.order_date, o.order_total, o.delivery_status, o.order_status, u.user_name, u.email, oi.order_quantity FROM orders o INNER JOIN users u ON o.user_id =u.user_id INNER JOIN order_item oi ON o.order_id = oi.order_id";
+  public static final String GET_ORDER_INFO = "SELECT  o.order_id, o.order_date, o.order_total, o.delivery_status, o.order_status, u.user_name, u.email, oi.order_quantity, p.product_id, p.product_name, p.product_price, p.product_image_path FROM orders o INNER JOIN users u ON o.user_id =u.user_id INNER JOIN order_item oi ON o.order_id = oi.order_id INNER JOIN product p ON oi.product_id = p.product_id WHERE o.order_id=?";
+  public static final String UPDATE_ORDER = "UPDATE orders SET delivery_status=?, order_status=? WHERE order_id=?";
+  public static final String USER_ORDER_PAGE = "/pages/user-orders.jsp";
+  
+  public static final String SEARCH_RESULT_PAGE = "/pages/search-result.jsp";
 }
+
 

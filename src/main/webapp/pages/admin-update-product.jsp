@@ -40,7 +40,6 @@
 				<!-- add hidden wala -->
 				 <input type="hidden" name="product_id" value="${product.productId}" />
 				
-		
 				<a href="${pageContext.request.contextPath}/pages/admin-product.jsp"><button type="submit" class="poppins-semibold">Update Product</button></a>
 					
 			</form>

@@ -7,14 +7,14 @@
 <meta charset="ISO-8859-1">
 <title>Registration Form</title>
 <link rel="stylesheet" type="text/css" href="/BubblesandWhirls/stylesheets/style.css"/>
-
+<link rel="stylesheet" type="text/css" href="/BubblesandWhirls/stylesheets/header.css"/>
 </head>
 <body class="poppins-regular">
 	<jsp:include page="header.jsp"></jsp:include>
 	<div class="wrapper" style="background-image: url('../images/background.png');">
 		<div class="inner">
 			<div class="image-holder">
-				<img src=>
+				<img src="${pageContext.request.contextPath}/images/image-holder.png">
 			</div>
 			<div class="form-holder">
 			<form action="/BubblesandWhirls/RegisterServlet" method="post"  enctype="multipart/form-data">

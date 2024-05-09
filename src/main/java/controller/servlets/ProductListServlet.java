@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import controller.database.DBController;
 import model.ProductModel;
@@ -45,17 +46,31 @@ public class ProductListServlet extends HttpServlet {
 		List<ProductModel> productList = dbController.getAllProductsInfo();
 		request.setAttribute("productList",productList);
 		
+		HttpServletRequest req = (HttpServletRequest) request;
+		HttpServletResponse res = (HttpServletResponse) response;
+		HttpSession session = req.getSession(false);
+		boolean isAdmin = session != null && session.getAttribute("role") == "admin";
 		
-		//know current user role
+//		String uri = req.getRequestURI();
 		
-		//if user role admin
+//		if(isAdmin) {
+			request.getRequestDispatcher(StringUtils.ADMIN_PRODUCT_PAGE).forward(request, response);	
+//		}else {
+//			
+//			request.getRequestDispatcher(StringUtils.USER_PRODUCT_PAGE).forward(request, response);			
+//		}
 		
-		//else
 		
 		
-//		request.getRequestDispatcher(StringUtils.ADMIN_PRODUCT_PAGE).forward(request, response);
-		request.getRequestDispatcher(StringUtils.USER_PRODUCT_PAGE).forward(request, response);
-		
+//		if(isAdmin) {
+//			request.getRequestDispatcher(StringUtils.ADMIN_PRODUCT_PAGE).forward(request, response);	
+//		}else if(uri.endsWith("/index.jsp")) {
+//			request.getRequestDispatcher(StringUtils.USER_PRODUCT_PAGE).forward(request, response);		
+//				
+//		}else if(uri.endsWith("/user")) {
+//			request.getRequestDispatcher(StringUtils.USER_PRODUCT_PAGE).forward(request, response);		
+//		}
+//		
 	}
 	
 

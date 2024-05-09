@@ -75,7 +75,7 @@ public class ProductUpdateServlet extends HttpServlet {
 		
 		int result = dbController.updateProductInfo(productModel);
 		System.out.println(""+result);
-		response.sendRedirect(request.getContextPath()+"/ProductServlet");
+		response.sendRedirect(request.getContextPath()+"/ProductListServlet");
 		
 	//
 		

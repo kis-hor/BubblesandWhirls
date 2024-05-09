@@ -97,9 +97,11 @@ public class AuthenticationFilter implements Filter {
 				        chain.doFilter(request, response);
 				    }
 				} else {
-				    if (isLogoutServlet) {
-			        // User is trying to logout, redirect to login page
-				    	res.sendRedirect(req.getContextPath() + "/pages/login.jsp");
+					// Allow access to login page if user is trying to access it after logout
+					if (uri.endsWith(StringUtils.LOGIN_PAGE) && !isLoggedIn && isLogoutServlet) {
+					    chain.doFilter(request, response);
+					    return;
+					
 				    } else if (isLogin || isLoginServlet || isRegister || isRegisterServlet) {
 			    		res.sendRedirect(req.getContextPath() + "/index.jsp");
 			    	} else {

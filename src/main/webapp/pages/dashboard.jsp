@@ -23,24 +23,28 @@
 								<img src="../images/revenue.png" alt="Dashboard Icon">
 							</div>
 							<h3>Total Revenue</h3>
+							<h3>Rs.1000000</h3>
 						</div>
 						<div class="data-panel-item">
 							<div class="data-panel-icon">
 								<img src="../images/order.png" alt="Dashboard Icon">
 							</div>
 							<h3>Total Orders</h3>
+							<h3>1780</h3>
 						</div>
 						<div class="data-panel-item">
 							<div class="data-panel-icon">
 								<img src="../images/users.png" alt="Dashboard Icon">
 							</div>
 							<h3>Total Customers</h3>
+							<h3>387</h3>
 						</div>
 						<div class="data-panel-item">
 							<div class="data-panel-icon">
 								<img src="../images/fulfilled.png" alt="Dashboard Icon">
 							</div>
 							<h3>Fulfilled Orders</h3>
+							<h3>1098</h3>
 						</div>
 					</div>
 			</div>
@@ -94,7 +98,6 @@
 			
 			</div>
 		</div>
-	</div>
 	
 	
 </body>

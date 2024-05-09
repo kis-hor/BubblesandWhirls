@@ -6,25 +6,30 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="/BubblesandWhirls/stylesheets/header.css"/>
+<link rel="stylesheet" type="text/css" href="/BubblesandWhirls/stylesheets/product.css"/>
 </head>
 <body class="poppins-regular">
 <jsp:include page="header.jsp"></jsp:include>
-	<h1>Welcome to product page of Admin Panel</h1>
+
+	<h1 style="padding-left:50px;">All Products</h1>
 	<div class="products-info">
 		<div class="products">
 			<c:forEach var="product" items="${productList}">
 				<div class="card">
-					<img src ="${pageContext.request.contextPath}/resources/images/user/${product.productImageUrl}" style="width:200px; height:200px"/>
+					
 					<div class="card-body">
+						<a href="${pageContext.request.contextPath}/ProductDetailServlet?productId=${product.productId}"><img src ="${pageContext.request.contextPath}/resources/images/user/${product.productImageUrl}" style="width:200px; height:200px"/></a>
 						<h4 class="card-title">${product.productName}</h4>
 						<h4 class="card-title">Rs.${product.productPrice}</h4>
 						<h5 class="card-text">Available: ${product.productInventory} pcs</h5>
-					</div>
+					
 					<form method="post"
 						action="${pageContext.request.contextPath}/CartServlet">
 						<input type="hidden" name="" value="" />
-						<button type="submit">Add to Cart</button>
+						<button class="poppins-semibold" type="submit">Add to Cart</button>
 					</form>
+				</div>
 				</div>
 				
 			</c:forEach>

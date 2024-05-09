@@ -8,13 +8,14 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/BubblesandWhirls/stylesheets/admin.css"/>
-<!-- <link rel="stylesheet" type="text/css" href="/BubblesandWhirls/stylesheets/style.css"/> -->
+<link rel="stylesheet" type="text/css" href="/BubblesandWhirls/stylesheets/style.css"/> 
 </head>
 <body class="poppins-regular">
 		<div class="admin-container">
 			<jsp:include page="admin-sidenav.jsp"></jsp:include>
 			<div class="main-panel">
-			    <h1>Products</h1>
+			    <h1>Products</h1> 
+			    
 			    <div class="products-info">
 			        <table class="products-table">
 			            <thead>
@@ -54,10 +55,10 @@
 			            </tbody>
 			        </table>
 			    </div>
+			    
+			<a href="${pageContext.request.contextPath}/pages/add-product.jsp"><button class="poppins-semibold add-button">Add Product</button></a>
 			</div>
-
 		</div>
-	
 </body>
 
 		<script>

@@ -1,83 +1,57 @@
 <%@page import="model.RegisterModel"%>
-<%@page import="java.util.ArrayList"%>
 <%@page import="util.StringUtils"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%
 String contextPath = request.getContextPath();
 %>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="/BubblesandWhirls/stylesheets/admin.css"/>
+<title>User Details</title>
+<link rel="stylesheet" type="text/css" href="/BubblesandWhirls/stylesheets/user-profile.css"/>
 </head>
 <body class="poppins-regular">
-		<div class="admin-container">
-			<jsp:include page="admin-sidenav.jsp"></jsp:include>
-			<div class="main-panel">
-			    <h1>Users</h1>
-			    <div class="products-info">
- 				<table class="products-table">
-			            <thead>
-			                <tr>
-			                    <th>Image</th>
-			                    <th>Username</th>
-			                    <th>Name</th>
-			                    <th>Email</th>
-			                    <th>Phone Number</th>
-			                   	<th>Update</th>
-			                    <th>Delete</th>
-			                </tr>
-			            </thead>
-			            <tbody>
-			            	<c:if test="${empty userList}">
-								<p>No user found.</p>
-							</c:if>
-							<c:if test="${not empty userList}">
-			                <c:forEach var="user" items="${userList}">
-			                    <tr>
-			                        <td><img src="${pageContext.request.contextPath}/resources/images/user/${user.imageUrlFromPart}" alt="User Image" style="width:100px; height:100px;"></td>
-			                        <td>${user.username}</td>
-			                        <td>${user.firstName} ${user.lastName}</td>
-			                        <td>${user.email}</td>
-			                        <td>${user.phoneNumber}</td>
-			                        <td>
-			                            <form method="post" action="<%=contextPath + StringUtils.SERVLET_URL_MODIFY_USER%>">
-										<input type="hidden" name="<%=StringUtils.UPDATE_USER_ID %>" value="${user.username}" />
-			                                <a href="${pageContext.request.contextPath}/UserUpdateServlet?updateId=${user.username}"><img src="/BubblesandWhirls/images/update.png"></a>
-			                            </form>
-			                       
-			                       	</td>
-			                         <td>
-			                            <form id="deleteForm-${user.username}" method="post" action="<%=contextPath + StringUtils.SERVLET_URL_MODIFY_USER %>">
-										<input type="hidden" name="<%=StringUtils.DELETE_USER_ID %>" value="${user.username}" />
-			                                <a style="cursor:pointer; "onclick="confirmDelete('${user.username}')"><img src="/BubblesandWhirls/images/delete.png"></a>
-			                            </form>
-			                        </td>
-			                    </tr>
-			                </c:forEach>
-			                </c:if>
-			            </tbody>
-			        </table>
-				</div>
-				</div>
-			</div>
-
-	<%-- <jsp:include page="<%=StringUtils.PAGE_URL_FOOTER%>" /> --%>
+    <div class="user-container">
+    	<jsp:include page="user-sidenav.jsp"></jsp:include>
+      
+        
+        <div class="main-panel">
+          <h1>My Account</h1>
+            <table class="user-table">
+                <tr>
+                    <td class="label">User Image:</td>
+                    <td><img src ="${pageContext.request.contextPath}/resources/images/user/${user.imageUrlFromPart}" style="width:200px; height:200px;"></td>
+                </tr>
+                <tr>
+                    <td class="label">Username:</td>
+                    <td>${user.username}</td>
+                </tr>
+                <tr>
+                    <td class="label">Full Name:</td>
+                    <td>${user.firstName} ${user.lastName}</td>
+                </tr>
+                <tr>
+                    <td class="label">Email:</td>
+                    <td>${user.email}</td>
+                </tr>
+                <tr>
+                    <td class="label">Phone Number:</td>
+                    <td>${user.phoneNumber}</td>
+                </tr>
+            </table>
+            <!-- Add more details as needed -->
+        </div>
+        <div class="actions">
+            <form method="post" action="<%=contextPath + StringUtils.SERVLET_URL_MODIFY_USER%>">
+                <input type="hidden" name="<%=StringUtils.UPDATE_USER_ID %>" value="${user.username}" />
+                
+                <a href="${pageContext.request.contextPath}/UserUpdateServlet?updateId=${user.username}"><img src="/BubblesandWhirls/images/update.png"></a>
+               
+            </form>
+            	 <label for="updateAccount">Edit Account</label>
+        </div>
+    </div>
 </body>
-
-
-<script>
-	function confirmDelete(username) {
-		if (confirm("Are you sure you want to delete this user: " + username
-				+ "?")) {
-			document.getElementById("deleteForm-" + username).submit();
-		}
-	}
-</script>
-
 </html>

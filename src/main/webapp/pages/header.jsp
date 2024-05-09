@@ -18,9 +18,9 @@
         <h1 class="logo"><a href=""><img src="${pageContext.request.contextPath}/images/logo.png"/></a></h1>
         <ul class="main-nav" style="padding-left:200px;">
             <li><a href="index.jsp">HOME</a></li>
-            <li><a href="#">PRODUCTS</a></li>
-            <li><a href="#">ABOUT US</a></li>
-            <li><a href="#">ORDERS</a></li>
+            <li><a href="/BubblesandWhirls/ProductListServlet">PRODUCTS</a></li>
+            <li><a href="${pageContext.request.contextPath}/pages/about-us.jsp">ABOUT US</a></li>
+            <li><a href="/BubblesandWhirls/OrderDetailServlet">ORDERS</a></li>
         </ul>
         <div class="login-signup" style="display: flex;align-items: center; margin-left: auto;">
             <form action="<%
@@ -47,11 +47,9 @@
             <% } %>
         </div>
         <div class="icon-container">
-            <!-- Icon 1 -->
-            <img src="${pageContext.request.contextPath}/images/Vector.png" alt="Icon 1">
-            <!-- Icon 2 -->
-            <img src="${pageContext.request.contextPath}/images/search.png" alt="Icon 2">
-            <!-- Icon 3 -->
+           <a href="${pageContext.request.contextPath}/UserDetailServlet"><img src="${pageContext.request.contextPath}/images/Vector.png" alt="Icon 1"></a>
+           	<a href="${pageContext.request.contextPath}/pages/search.jsp"><img src="${pageContext.request.contextPath}/images/search.png" alt="Icon 2"></a>
+            
             <img src="${pageContext.request.contextPath}/images/shop.png" alt="Icon 3">
         </div>
     </header>

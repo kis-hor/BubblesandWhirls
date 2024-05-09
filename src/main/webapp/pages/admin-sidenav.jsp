@@ -13,7 +13,7 @@
 	    	<ul>
 		        <li><a href="${pageContext.request.contextPath}/pages/dashboard.jsp">Dashboard<img src="/BubblesandWhirls/images/dashboard-icon.png" alt="Dashboard Icon"></a></li>
 		        <li><a href="/BubblesandWhirls/ProductListServlet">Products<img src="/BubblesandWhirls//images/dashboard-icon.png" alt="Dashboard Icon"></a></li>
-		        <li><a href="#Orders">Orders<img src="/BubblesandWhirls/images/dashboard-icon.png" alt="Dashboard Icon"></a></li>
+		        <li><a href="/BubblesandWhirls/OrderListServlet">Orders<img src="/BubblesandWhirls/images/dashboard-icon.png" alt="Dashboard Icon"></a></li>
 		        <li><a href="/BubblesandWhirls/UserListServlet">Customers<img src="/BubblesandWhirls/images/dashboard-icon.png" alt="Dashboard Icon"></a></li>
 	    	</ul>
 		</nav>

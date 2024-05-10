@@ -10,93 +10,141 @@
 <link rel="stylesheet" type="text/css" href="/BubblesandWhirls/stylesheets/style.css"/>
 <link rel="stylesheet" type="text/css" href="/BubblesandWhirls/stylesheets/header.css"/>
 <link rel="stylesheet" type="text/css" href="/BubblesandWhirls/stylesheets/product.css"/>
+<link rel="stylesheet" type="text/css" href="/BubblesandWhirls/stylesheets/footer.css"/>
+
+<%
+    // Get the session and request objects
+    String contextPath = request.getContextPath();
+%>
 <style>
-        body, html {
-        height: 100%;
-        margin: 0;
-    }
-
-    .hero-section {
+   .red-container, .blue-container, .third-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    width: 100%;
     position: relative;
-    height: 70vh; /* 70% of the viewport height */
-    overflow: hidden; /* Hide overflow content */
-}
+  }
 
-.hero-image {
-    position: relative;
+  .hero-image, .hero-image2 {
     width: 100%;
     height: auto;
-}
+    object-fit: contain;
+  }
 
-.hero-description {
+  .text-container {
     position: absolute;
-    top: 50%; /* Position from the top */
-    left: 50%; /* Position horizontally centered */
-    transform: translate(-50%, -50%); /* Move back 50% of its own width and height */
-    z-index: 1; /* Ensure it appears above the image */
-    text-align: center; /* Center the content horizontally */
-    color: white; /* Text color */
-    padding: 20px; /* Add padding for better spacing */
-    /*background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
-}
-
-.fade-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7)); /* Black fade effect */
-}
-
-
-    .hero-description button {
-        margin-top: 20px; /* Adjust vertical spacing as needed */
-        margin-left:30px;
-    }
+    top: 80%;
+    transform: translateY(-50%);
+    text-align: center;
+    color: #ffffff;
+    z-index: 1;
     
+  }
 
+  .brand-name {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #004E4E;
+  }
+
+  .slogan {
+    font-size: 24px;
+    color: #004E4E;
+    font-weight: bold;
+  }
+
+  .button {
+    padding: 10px 30px;
+    background-color: #ffffff;
+    color: #004E4E;
+    border: none;
+    border-radius: 35px;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 20px;
+    
+  }
+  .button-container {
+    margin-top: 20px;
+    margin-left: 40px;
+  }
+  
+  .blue-container {
+    margin: 20px 0; /* Add margin only to the blue container */
+  }
+
+  .blue-container img {
+    max-width: 60%; /* Adjust the width of the blue container image */
+    height: auto;
+    object-fit: contain;
+    background-color: #ffffff;
+  }
+  .third-container {
+    margin-top: 20px;
+    margin-bottom: 200px;
+    text-align: center;
+}
+
+.third-container .text-container {
+    color: #ffffff;
+}
+
+   .third-container .brand-name {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: black;
+}
+  .buttont {
+  	 padding: 10px 10px;
+    background-color: #004E4E;
+    color: #fffff;
+    border: none;
+    border-radius: 35px;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.third-container .slogan {
+    font-size: 24px;
+    color: black;
+    font-weight: bold;
+}
+
+.third-container .button-container {
+    margin-top: 20px;
+}
+  
 </style>
 </head>
 <body class="poppins-regular">
     <jsp:include page="/pages/header.jsp"></jsp:include>
-    <div class="hero-section">
-        <div class="hero-description">
-            <h4>Bubbles & Whirls</h4>
-            <h2>Elevate cleanliness!</h2>
-            <a href="${pageContext.request.contextPath}/ProductListServlet"><button class="poppins-semibold">Shop Now</button></a>
-        </div>
-        <div class="hero-image">
-            <img src="${pageContext.request.contextPath}/images/hero.png">
-            <div class="fade-overlay"></div>
+   	<div class="red-container">
+    <div class="text-container">
+        <div class="brand-name">Bubbles & Whirls</div>
+        <div class="slogan">Elevate Cleanliness</div>
+        <div class="button-container">
+            <a href="/BubblesandWhirls/ProductListServlet" style="text-decoration:none;"><button class="button">Shop Now</button></a>
         </div>
     </div>
-    
-    	<h1 style="padding-left:50px;">Our Products</h1>
-		<div class="products-info">
-		<div class="products">
-			<c:forEach var="product" items="${productList}">
-				<div class="card">
-					
-					<div class="card-body">
-						<a href="${pageContext.request.contextPath}/ProductDetailServlet?productId=${product.productId}"><img src ="${pageContext.request.contextPath}/resources/images/user/${product.productImageUrl}" style="width:200px; height:200px"/></a>
-						<h4 class="card-title">${product.productName}</h4>
-						<h4 class="card-title">Rs.${product.productPrice}</h4>
-						<h5 class="card-text">Available: ${product.productInventory} pcs</h5>
-					
-					<form method="post"
-						action="${pageContext.request.contextPath}/CartServlet">
-						<input type="hidden" name="" value="" />
-						<button class="poppins-semibold" type="submit">Add to Cart</button>
-					</form>
-				</div>
-				</div>
-				
-			</c:forEach>
-		
-		</div>
-	</div>
+    <img src="${pageContext.request.contextPath}/resources/images/hero-section-1.jpg" alt="Hero Image" class="hero-image">
+</div>
+
+<div class="blue-container">
+    <img src="${pageContext.request.contextPath}/resources/images/hero-section-2 .jpg" alt="Hero Image" class="hero-image2">
+</div>
+
+<div class="third-container">
+    <div class="text-container">
+        <div class="brand-name"></div>
+        <div class="slogan" style="padding-top:50px;">Contact Our Team!!</div>
+        <div class="button-container">
+            <a href="${pageContext.request.contextPath}/pages/about-us.jsp"><button class="buttont">Go to About Us</button></a>
+        </div>
+    </div>
+</div>
+	<jsp:include page="/pages/footer.jsp"></jsp:include>
 </body>
 
 </html>
-

@@ -13,6 +13,7 @@ import model.OrderModel;
 import model.PasswordEncryptionWithAes;
 import model.ProductModel;
 import model.RegisterModel;
+import model.ContactModel;
 import util.StringUtils;
 
 
@@ -28,6 +29,26 @@ public class DBController {
 		                                      StringUtils.HOST_PASS);
 		}
 		
+		public int addMessage(ContactModel contactModel) {
+			try {
+				Connection con = getConnection();
+		        PreparedStatement stmt = getConnection()
+		        		.prepareStatement("INSERT INTO contact(name,email,message) VALUES(?,?,?)");
+		        stmt.setString(1, contactModel.getName());
+				stmt.setString(2, contactModel.getEmail());
+				stmt.setString(3, contactModel.getMessage());
+		
+				
+				int result = stmt.executeUpdate();
+				return result > 0 ? 1 : 0;
+				
+		        
+			}catch (ClassNotFoundException | SQLException ex) {
+		        // Print the stack trace for debugging purposes
+		        ex.printStackTrace();
+		        return -1;
+			}
+		}
 		// Register User Starts here
 		public int registerStudent(RegisterModel user) {
 
@@ -352,6 +373,8 @@ public class DBController {
 					order.setProductName(result.getString("product_name"));
 					order.setProductPrice(result.getInt("product_price"));
 					order.setProductImageUrl(result.getString("product_image_path"));
+					order.setPaymentOption(result.getString("payment_option"));
+					order.setShippingAddress(result.getString("shipping_address"));
 				}
 				return order;	
 			}catch(SQLException | ClassNotFoundException ex) {
@@ -400,7 +423,6 @@ public class DBController {
 				pdt.setString(1, orderModel.getDeliveryStatus());
 				pdt.setString(2, orderModel.getOrderStatus());
 				pdt.setInt(3, orderModel.getOrderId());
-				
 				
 				int result = pdt.executeUpdate();
 				

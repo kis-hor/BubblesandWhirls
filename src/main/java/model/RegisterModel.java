@@ -7,7 +7,6 @@ import javax.servlet.http.Part;
 import util.StringUtils;
 
 public class RegisterModel {
-	
 		private String firstName;
 		private String lastName;
 		private String email;

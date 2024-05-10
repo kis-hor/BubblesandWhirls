@@ -1,3 +1,4 @@
+<%@page import="util.StringUtils" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -53,8 +54,17 @@
 
     <h1>About Us</h1>
     <div class="contact-form">
+    		<% 
+		    String successMessage = (String) request.getAttribute(StringUtils.SUCCESS_MESSAGE);
+		    if(successMessage != null && !successMessage.isEmpty()){
+			%>
+		    <p class="success-message"><%= successMessage %></p>
+			<%
+		    }
+			%>
+    
         <h2>Contact Us</h2>
-        <form action="#" method="post">
+        <form action="/BubblesandWhirls/ContactServlet" method="post">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
             <label for="email">Email:</label>
@@ -66,9 +76,9 @@
     </div>
     <div class="contact-details">
         <h2>Contact Details</h2>
-        <p><strong>Address:</strong> 123 Main Street, City, Country</p>
-        <p><strong>Phone:</strong> +1 234 567 890</p>
-        <p><strong>Email:</strong> info@example.com</p>
+        <p><strong>Address:</strong> Islington College, Kamalpokhari</p>
+        <p><strong>Phone:</strong> +977 9812345678</p>
+        <p><strong>Email:</strong> bubblesandwhirls@gmail.com</p>
     </div>
 </div>
 </body>

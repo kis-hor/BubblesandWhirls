@@ -13,6 +13,8 @@ public class OrderModel {
 	private int orderTotal;
 	private String deliveryStatus;
 	private String orderStatus;
+	private String paymentOption;
+	private String shippingAddress;
 	private int orderQuantity;
 	private String username;
 	private String email; 
@@ -21,7 +23,7 @@ public class OrderModel {
 	private int productPrice;
 	private String productImageUrl;
 	
-	public OrderModel(int orderId, LocalDate orderDate, int orderTotal, String deliveryStatus, String orderStatus, int orderQuantity, String username, String email, int productId, String productName, int productPrice, Part imagePart) {
+	public OrderModel(int orderId, LocalDate orderDate, int orderTotal, String deliveryStatus, String orderStatus, String paymentOption, String shippingAddress, int orderQuantity, String username, String email, int productId, String productName, int productPrice, Part imagePart) {
 		this.orderId = orderId;
 		this.orderDate = orderDate;
 		this.orderTotal = orderTotal;
@@ -154,5 +156,21 @@ public class OrderModel {
 			imageUrlFromPart = "download.jpg";
 		}
 		return imageUrlFromPart;
+	}
+
+	public String getPaymentOption() {
+		return paymentOption;
+	}
+
+	public void setPaymentOption(String paymentOption) {
+		this.paymentOption = paymentOption;
+	}
+
+	public String getShippingAddress() {
+		return shippingAddress;
+	}
+
+	public void setShippingAddress(String shippingAddress) {
+		this.shippingAddress = shippingAddress;
 	}
 }

@@ -51,27 +51,15 @@ public class ProductListServlet extends HttpServlet {
 		HttpSession session = req.getSession(false);
 		boolean isAdmin = session != null && session.getAttribute("role") == "admin";
 		
-//		String uri = req.getRequestURI();
+		
 		
 //		if(isAdmin) {
-			request.getRequestDispatcher(StringUtils.ADMIN_PRODUCT_PAGE).forward(request, response);	
+//	request.getRequestDispatcher(StringUtils.ADMIN_PRODUCT_PAGE).forward(request, response);	
 //		}else {
-//			
-//			request.getRequestDispatcher(StringUtils.USER_PRODUCT_PAGE).forward(request, response);			
-//		}
+		request.getRequestDispatcher(StringUtils.USER_PRODUCT_PAGE).forward(request, response);			
+		}
 		
-		
-		
-//		if(isAdmin) {
-//			request.getRequestDispatcher(StringUtils.ADMIN_PRODUCT_PAGE).forward(request, response);	
-//		}else if(uri.endsWith("/index.jsp")) {
-//			request.getRequestDispatcher(StringUtils.USER_PRODUCT_PAGE).forward(request, response);		
-//				
-//		}else if(uri.endsWith("/user")) {
-//			request.getRequestDispatcher(StringUtils.USER_PRODUCT_PAGE).forward(request, response);		
-//		}
-//		
-	}
+//	}
 	
 
 	/**

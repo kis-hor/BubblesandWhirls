@@ -8,11 +8,13 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/BubblesandWhirls/stylesheets/style.css"/>
 <link rel="stylesheet" type="text/css" href="/BubblesandWhirls/stylesheets/admin.css"/>
+<link rel="stylesheet" type="text/css" href="/BubblesandWhirls/stylesheets/admin-header.css"/>
 
 
 </head>
 <body class="poppins-regular">
 	<div class="admin-container">
+	
 		<jsp:include page="admin-sidenav.jsp"></jsp:include>
 		
 		<div class="main-panel">

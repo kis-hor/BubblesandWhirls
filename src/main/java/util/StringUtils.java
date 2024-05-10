@@ -28,6 +28,7 @@ public class StringUtils {
 //    public static final String ROLE = "role";
     
     public static final String SUCCESS_REGISTER_MESSAGE = "Successfully Registered";
+    public static final String SUCCESS_CONTACT_MESSAGE = "We have received your message. We will get back to you soon!";
 	public static final String SUCCESS_LOGIN_MESSAGE = "Successfully logged in";
 	public static final String REGISTER_ERROR_MESSAGE = "Please correct the form data";
 	public static final String LOGIN_ERROR_MESSAGE = "Login Unsuccessful";
@@ -63,6 +64,7 @@ public class StringUtils {
     public static final String SERVLET_URL_MODIFY_USER = "/ModifyServlet";
     public static final String USER_LIST_SERVLET = "/UserListServlet";
     public static final String ADMIN_ORDER_PAGE = "/pages/admin-orders.jsp";
+    public static final String ABOUT_US_PAGE = "/pages/about-us.jsp";
     
     public static final String USER = "user";
     
@@ -101,7 +103,7 @@ public class StringUtils {
   
   public static final String GET_ALL_USER_ORDERS = "SELECT  o.order_id, o.order_date, o.order_total, o.delivery_status, o.order_status, u.user_name, u.email, oi.order_quantity, p.product_id, p.product_name, p.product_price, p.product_image_path FROM orders o INNER JOIN users u ON o.user_id =u.user_id INNER JOIN order_item oi ON o.order_id = oi.order_id INNER JOIN product p ON oi.product_id = p.product_id WHERE u.user_id=?";
   public static final String GET_ALL_ORDERS_INFO = "SELECT o.order_id, o.order_date, o.order_total, o.delivery_status, o.order_status, u.user_name, u.email, oi.order_quantity FROM orders o INNER JOIN users u ON o.user_id =u.user_id INNER JOIN order_item oi ON o.order_id = oi.order_id";
-  public static final String GET_ORDER_INFO = "SELECT  o.order_id, o.order_date, o.order_total, o.delivery_status, o.order_status, u.user_name, u.email, oi.order_quantity, p.product_id, p.product_name, p.product_price, p.product_image_path FROM orders o INNER JOIN users u ON o.user_id =u.user_id INNER JOIN order_item oi ON o.order_id = oi.order_id INNER JOIN product p ON oi.product_id = p.product_id WHERE o.order_id=?";
+  public static final String GET_ORDER_INFO = "SELECT  o.order_id, o.order_date, o.order_total, o.delivery_status, o.order_status, o.payment_option, o.shipping_address, u.user_name, u.email, oi.order_quantity, p.product_id, p.product_name, p.product_price, p.product_image_path FROM orders o INNER JOIN users u ON o.user_id =u.user_id INNER JOIN order_item oi ON o.order_id = oi.order_id INNER JOIN product p ON oi.product_id = p.product_id WHERE o.order_id=?";
   public static final String UPDATE_ORDER = "UPDATE orders SET delivery_status=?, order_status=? WHERE order_id=?";
   public static final String USER_ORDER_PAGE = "/pages/user-orders.jsp";
   

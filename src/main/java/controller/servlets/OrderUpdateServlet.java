@@ -38,6 +38,7 @@ public class OrderUpdateServlet extends HttpServlet {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		System.out.println("Getting order info");
 		String orderId = request.getParameter("updateId");
+	
 		OrderModel order = dbController.getOrderInfo(orderId);
 		
 		request.setAttribute("order", order);
@@ -53,16 +54,21 @@ public class OrderUpdateServlet extends HttpServlet {
 		String orderId = request.getParameter("order_id");
 		String deliveryStatus = request.getParameter("delivery_status");
 		String orderStatus = request.getParameter("order_status");
+//		String paymentOption =  request.getParameter("payment_option");
+//		String shippingAddress =  request.getParameter("shipping_address");
 		
-		System.out.println(request.getParameter("order_id"));
-		System.out.println(request.getParameter("order_status"));
-		System.out.println(request.getParameter("delivery_status"));
+		
+//		System.out.println(request.getParameter("shipping_address"));
+//		System.out.println(request.getParameter("payment_option"));
+		
 		
 		OrderModel orderModel = new OrderModel();
 		
 		orderModel.setOrderId(Integer.parseInt(orderId));
 		orderModel.setDeliveryStatus(deliveryStatus);
 		orderModel.setOrderStatus(orderStatus);
+//		orderModel.setPaymentOption(paymentOption);
+//		orderModel.setShippingAddress(shippingAddress);
 		
 		int result = dbController.updateOrderInfo(orderModel);
 		System.out.println(""+result);

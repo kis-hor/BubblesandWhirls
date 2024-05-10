@@ -11,9 +11,9 @@
 <body class="poppins-regular">
     <jsp:include page="header.jsp"></jsp:include>
     <div class="wrapper" style="background-image: url('${pageContext.request.contextPath}/images/background.png');">
-		<div class="inner">
-			<div class="image-holder">
-				 <img src="${pageContext.request.contextPath}/resources/images/user/${product.productImageUrl}" alt="Product Image" style="width: 450px; height: 600px;">
+		<div class="inner" style="height:550px;">
+			<div class="image-holder" >
+				 <img src="${pageContext.request.contextPath}/resources/images/user/${product.productImageUrl}" alt="Product Image" style="width: 450px; height: 400px;">
 			</div>
 			<div class="form-holder">
 				<div class="product-details">
@@ -28,7 +28,7 @@
 			            <p>Available: ${product.productInventory} pcs</p>
 			            <form method="post" action="${pageContext.request.contextPath}/CartServlet">
 			                <input type="hidden" name="productId" value="${product.productId}" />
-			                <button type="submit">Add to Cart</button>
+			                <button type="submit" class="poppins-semibold">Add to Cart</button>
 			            </form>
 			        </c:if>
     			</div>

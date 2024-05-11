@@ -1,0 +1,116 @@
+@charset "ISO-8859-1";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.poppins-regular {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.poppins-semibold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+}
+
+.wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.inner {
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  background: #fff;
+  width: 870px;
+  height: 660px;
+  margin: auto;
+  display: flex; }
+
+.image-holder,
+.form-holder {
+    width: 50%;
+    padding: 20px; /* Adjust padding as needed */
+}
+
+/* Optional: Add some space between image-holder and form-holder */
+.image-holder {
+    margin-right: 20px;
+    background-color: #004E4E;
+}
+
+/* Additional styling for form elements */
+.form-holder form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-holder input::placeholder {
+    font-family: "Poppins", sans-serif;
+    color: #111111;
+}
+
+.form-holder textarea::placeholder{
+	font-family: "Poppins", sans-serif;
+    color: #111111;
+}
+
+.form-holder input{
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    width: 94%; /* Make input fields full width */
+    padding: 8px;
+    margin-bottom: 25px;
+    border: none; /* Remove border */
+    border-bottom: 1px solid black; /* Add bottom border */
+    background: transparent; /* Make background transparent */
+    outline: none; /* Remove outline */
+}
+.form-group {
+    display: flex; /* Use flexbox to make form-group elements side by side */
+    justify-content: space-between; /* Add space between form elements */
+    margin-bottom: 25px; /* Add some margin between form-group elements */
+}
+
+.form-group input {
+    width: calc(50% - 5px); /* Set the width of input fields to 50% minus some space for margin */
+    /* Adjust padding and other styles as needed */
+    margin: 5px;
+}
+    
+button {
+    background-color: #004E4E; /* Example button background color */
+    color: #fff; /* Example button text color */
+    border: none;
+    cursor: pointer;
+    display: flex;
+	padding: 10px 18px;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	border-radius: 42px;
+	width: 165px;
+    align-self: center;
+   
+}
+
+button:hover {
+    background-color: #0056b3; /* Example button hover background color */
+}
+
+
+
+/* Add other styles as needed */

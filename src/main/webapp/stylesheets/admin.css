@@ -1,0 +1,179 @@
+@charset "ISO-8859-1";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+.poppins-regular {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.poppins-semibold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.admin-container {
+    display: flex;
+    align-items: stretch;
+    min-height: 100vh;
+}
+
+
+
+.side-panel {
+    width: 300px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #004E4E;
+    padding: 20px;
+}
+
+.main-panel {
+    flex: 1;
+    margin-left: 340px; /* Adjust this value to match the width of the side panel */
+    padding: 40px;
+    
+}
+
+
+/* Remove default list styling for the navigation links */
+.side-panel ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.side-panel ul li a img {
+    width: 20px; /* Adjust the width of the icon */
+    height: 20px; /* Adjust the height of the icon */
+    margin-left: 10px; /* Add spacing between the icon and text */
+}
+
+/* Style the navigation links */
+.side-panel ul li a {
+	display: flex;
+    justify-content: space-between; /* Align items horizontally with space between */
+    align-items: center; /* Align items vertically */
+    text-decoration: none;
+    color: #fff; /* Set text color */
+    padding: 10px;
+    transition: border-color 0.3s; /* Add transition effect for border color */
+}
+
+/* Hover effect for the navigation links */
+.side-panel ul li a:hover {
+    
+    background-color: #3E6C6C; /* Change background color on hover */
+    color: #fff; /* Change text color on hover */
+    border-radius:5px;
+}
+
+
+.main-panel {
+    display: flex; /* Use flexbox */
+    flex-direction: column; /* Stack items vertically */
+}
+
+.data-panel {
+    flex: 1; /* Expand to fill remaining space */
+    display: flex; /* Use flexbox */
+    flex-direction: column; /* Stack items vertically */
+    padding: 40px;
+    max-height:350px;
+  
+}
+
+.data-panel-row {
+    display: flex; /* Use flexbox */
+}
+
+
+.data-panel-item {
+    flex: 1; /* Distribute space evenly among items */
+    padding: 20px; /* Add padding */
+    background-color: #e0e0e0; /* Example background color */
+    margin-right: 30px; /* Add right margin for horizontal spacing */
+    width: 310px; /* Set wrapper width */
+    height: 310px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column; /* Change the direction to column */
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #F6F6F6;
+}
+
+.data-panel-item:last-child {
+    margin-right: 0; /* Remove right margin for the last item to prevent extra spacing */
+}
+
+
+.data-panel-icon {
+    width: 90px;
+    height: 90px;
+    background-color: #EAEFEF;
+    margin-top:30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+        margin-bottom: 20px;
+
+}
+
+.data-panel-icon img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.data-panel h3 {
+    margin: 0;
+    font-size: 18px;
+   
+}
+.products-info{
+    background-color: #f6f6f6; /* Set grey background for the table container */
+    padding: 0px 30px;
+}
+
+.products-table {
+    width: 100%; /* Set table width to 100% of its container */
+    border-spacing: 0; /* Set border-spacing to 0 to control the distance between cells */
+}
+
+.add-button{
+	margin:20px;
+}
+
+.table-container {
+    padding: 0 20px; /* Add padding to the container, 20px on left and right */
+}
+
+.products-table th,
+.products-table td {
+    padding: 8px; /* Add padding to table cells, 20px on left and right */
+    text-align: center; /* Align text to the center within table cells */
+    border: none; /* Remove default cell borders */
+    border-bottom: 1px solid #dddddd; /* Add bottom border for rows */
+}
+
+.products-table th {
+  font-size:22px;
+  padding: 15px 10px;
+}
+
+.products-table tr:last-child td {
+    border-bottom: none; /* Remove bottom border for the last row */
+}
+
+.products-table tr td:first-child {
+    border-left: none; /* Remove left border for cells in the first column */
+}
+
+.products-table tr td:last-child {
+    border-right: none; /* Remove right border for cells in the last column */
+}
+

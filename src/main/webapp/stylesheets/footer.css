@@ -1,0 +1,186 @@
+@charset "ISO-8859-1";
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.poppins-regular {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.poppins-semibold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+    line-height: 1.5;
+}
+
+h4 {
+    margin: 0; /* Reset margin for h4 */
+}
+
+/* Rest of your CSS styles */
+
+*::selection{
+    background: #99B8B8;
+    color: #004E4E;
+}
+
+.container{
+    max-width: 1170px;
+    margin: auto;
+}
+.row{
+    display: flex;
+    flex-wrap: wrap;
+}
+ul{
+    list-style: none;
+}
+.footer{
+    background: #004E4E;
+    padding: 70px 0;
+}
+.footer-col {
+    width: calc(25% - 30px); /* Adjusted width */
+    padding: 0 15px;
+    box-sizing: border-box; /* Ensure padding is included in the width */
+    margin-bottom: 20px; /* Added margin-bottom */
+}
+
+.footer-col h4{
+    font-size: 14px;
+    color: #fff;
+    text-transform: capitalize;
+    margin-bottom: 35px;
+    font-weight: 600;
+    position: relative;
+}
+/* .footer-col h4::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10 !important;
+    background: #e91e63;
+    height: 2px;
+    box-sizing: border-box;
+    width: 50px;
+} */
+
+.footer-col h4 hr{
+    width: 20%;
+    border: 1px solid #99B8B8;
+    margin: 0;
+}
+
+
+.footer-col ul li:not(:last-child){
+    margin-bottom: 10px;
+}
+
+.footer-col ul li a{
+    font-size: 16px;
+    text-transform: capitalize;
+    color: #fff;
+    text-decoration: none;
+    color: #99B8B8;
+    display: block;
+    transition: all .3s ease;
+}
+.footer-col ul li a:hover{
+    color: #fff;
+    padding-left: 8px;
+}
+.footer-col .social-links a{
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    background: rgb(255,255,255,0.2);
+    margin:0 10px 10px 0;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    color: #fff;
+    transition: all .5s ease;
+}
+.footer-col .social-links a:hover{
+    color: #24262b;
+    background: #fff;
+}
+
+/* CSS for email input field and subscribe button container */
+.footer-col form .subscribe-container {
+    display: flex;
+    align-items: center;
+    border: 1px solid #fff;
+
+    margin-top: 10px; /* Adjust the margin-top as needed */
+}
+
+/* CSS for email input field */
+.footer-col form input[type="email"] {
+    border: none;
+    padding: 10px;
+    width: 70%; /* Adjust the width as needed */
+    background-color: transparent;
+    color: #333;
+    outline: none;
+    box-sizing: border-box; /* Ensure padding doesn't affect width */
+}
+
+/* Placeholder color */
+.footer-col form input[type="email"]::placeholder {
+    color: #99b8b8;
+}
+
+/* CSS for subscribe button */
+.footer-col form button[type="submit"] {
+    border: none;
+    padding: 10px;
+    background-color: #004e4e;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    width: 30%; /* Adjust the width as needed */
+    box-sizing: border-box; /* Ensure padding doesn't affect width */
+    box-shadow: -1px 0 0 ; /* White border on the left side */
+    outline: none; /* Remove default button outline */
+}
+
+/* Hover effect for subscribe button */
+.footer-col form button[type="submit"]:hover {
+    background-color: #fff;
+    color: #004e4e;
+}
+
+/* CSS for the third column */
+.footer-col:nth-child(3) {
+    width: calc(25% - 10px); /* Adjust the width as needed */
+    margin-right: 20px; /* Adjust the margin-right as needed */
+}
+
+/* CSS for the fourth column */
+.footer-col:nth-child(4) {
+    width: calc(25% - 10px); /* Adjust the width as needed */
+    margin-left: 20px; /* Adjust the margin-left as needed */
+}
+
+/* responsive */
+
+@media (max-width: 767px) {
+    .footer-col{
+        width: 50%;
+        margin-bottom: 30px;
+    }
+}
+@media (max-width: 574px) {
+    .footer-col{
+        width: 100%;
+    }
+}
+
